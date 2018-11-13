@@ -1,0 +1,7 @@
+HTTP/2.0 200 OK
+Content-Length: 453
+Audit-Id: 7b58767c-2fa9-4369-ae78-56bac8119422
+Content-Type: application/json
+Date: Fri, 15 Jun 2018 16:07:07 GMT
+
+{"kind":"APIResourceList","apiVersion":"v1","groupVersion":"apiextensions.k8s.io/v1beta1","resources":[{"name":"customresourcedefinitions","singularName":"","namespaced":false,"kind":"CustomResourceDefinition","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["crd"]},{"name":"customresourcedefinitions/status","singularName":"","namespaced":false,"kind":"CustomResourceDefinition","verbs":["update"]}]}

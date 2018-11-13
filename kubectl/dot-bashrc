@@ -1,0 +1,5 @@
+. /etc/bash_completion
+
+# k8s cli helpers
+. ~/.bash/kubectl.completion
+alias k='kubectl'
