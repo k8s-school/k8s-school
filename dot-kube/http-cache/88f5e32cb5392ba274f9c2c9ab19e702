@@ -1,7 +1,0 @@
-HTTP/2.0 200 OK
-Content-Length: 828
-Audit-Id: cb61940e-4aad-4aa9-a027-119219b11c0c
-Content-Type: application/json
-Date: Fri, 15 Jun 2018 16:07:07 GMT
-
-{"kind":"APIResourceList","apiVersion":"v1","groupVersion":"monitoring.coreos.com/v1","resources":[{"name":"prometheuses","singularName":"prometheus","namespaced":true,"kind":"Prometheus","verbs":["delete","deletecollection","get","list","patch","create","update","watch"]},{"name":"alertmanagers","singularName":"alertmanager","namespaced":true,"kind":"Alertmanager","verbs":["delete","deletecollection","get","list","patch","create","update","watch"]},{"name":"servicemonitors","singularName":"servicemonitor","namespaced":true,"kind":"ServiceMonitor","verbs":["delete","deletecollection","get","list","patch","create","update","watch"]},{"name":"prometheusrules","singularName":"prometheusrule","namespaced":true,"kind":"PrometheusRule","verbs":["delete","deletecollection","get","list","patch","create","update","watch"]}]}

@@ -1,6 +1,0 @@
-HTTP/2.0 200 OK
-Content-Length: 361
-Content-Type: application/json
-Date: Tue, 05 Jun 2018 08:14:27 GMT
-
-{"kind":"APIResourceList","apiVersion":"v1","groupVersion":"batch/v1","resources":[{"name":"jobs","singularName":"","namespaced":true,"kind":"Job","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"categories":["all"]},{"name":"jobs/status","singularName":"","namespaced":true,"kind":"Job","verbs":["get","patch","update"]}]}

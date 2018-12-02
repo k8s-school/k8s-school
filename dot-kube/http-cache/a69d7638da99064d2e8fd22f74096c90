@@ -1,7 +1,0 @@
-HTTP/2.0 200 OK
-Content-Length: 431
-Audit-Id: 99146b1e-8cf0-46e1-9692-36a1b8a3eec9
-Content-Type: application/json
-Date: Fri, 15 Jun 2018 16:07:06 GMT
-
-{"kind":"APIResourceList","apiVersion":"v1","groupVersion":"policy/v1beta1","resources":[{"name":"poddisruptionbudgets","singularName":"","namespaced":true,"kind":"PodDisruptionBudget","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["pdb"]},{"name":"poddisruptionbudgets/status","singularName":"","namespaced":true,"kind":"PodDisruptionBudget","verbs":["get","patch","update"]}]}

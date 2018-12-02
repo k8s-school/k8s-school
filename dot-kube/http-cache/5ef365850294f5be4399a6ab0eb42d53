@@ -1,7 +1,0 @@
-HTTP/2.0 200 OK
-Content-Length: 596
-Audit-Id: f2ff22bf-f0e8-4a20-ae9f-6367ed2c944c
-Content-Type: application/json
-Date: Fri, 15 Jun 2018 16:07:05 GMT
-
-{"kind":"APIResourceList","apiVersion":"v1","groupVersion":"authorization.k8s.io/v1beta1","resources":[{"name":"localsubjectaccessreviews","singularName":"","namespaced":true,"kind":"LocalSubjectAccessReview","verbs":["create"]},{"name":"selfsubjectaccessreviews","singularName":"","namespaced":false,"kind":"SelfSubjectAccessReview","verbs":["create"]},{"name":"selfsubjectrulesreviews","singularName":"","namespaced":false,"kind":"SelfSubjectRulesReview","verbs":["create"]},{"name":"subjectaccessreviews","singularName":"","namespaced":false,"kind":"SubjectAccessReview","verbs":["create"]}]}

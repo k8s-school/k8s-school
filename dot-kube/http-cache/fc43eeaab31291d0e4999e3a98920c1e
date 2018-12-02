@@ -1,7 +1,0 @@
-HTTP/2.0 200 OK
-Content-Length: 594
-Audit-Id: 2a5df1db-9bcc-4f7b-9add-be0e3a86ca0c
-Content-Type: application/json
-Date: Fri, 15 Jun 2018 16:07:06 GMT
-
-{"kind":"APIResourceList","apiVersion":"v1","groupVersion":"certificates.k8s.io/v1beta1","resources":[{"name":"certificatesigningrequests","singularName":"","namespaced":false,"kind":"CertificateSigningRequest","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"shortNames":["csr"]},{"name":"certificatesigningrequests/approval","singularName":"","namespaced":false,"kind":"CertificateSigningRequest","verbs":["update"]},{"name":"certificatesigningrequests/status","singularName":"","namespaced":false,"kind":"CertificateSigningRequest","verbs":["update"]}]}

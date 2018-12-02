@@ -1,7 +1,0 @@
-HTTP/2.0 200 OK
-Content-Length: 361
-Audit-Id: 3e976244-4120-40d1-91ef-8a65ee8de3fa
-Content-Type: application/json
-Date: Fri, 15 Jun 2018 16:07:05 GMT
-
-{"kind":"APIResourceList","apiVersion":"v1","groupVersion":"batch/v1","resources":[{"name":"jobs","singularName":"","namespaced":true,"kind":"Job","verbs":["create","delete","deletecollection","get","list","patch","update","watch"],"categories":["all"]},{"name":"jobs/status","singularName":"","namespaced":true,"kind":"Job","verbs":["get","patch","update"]}]}
