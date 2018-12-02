@@ -46,13 +46,9 @@ RUN wget https://github.com/garethr/kubeval/releases/download/${KUBEVAL_VERSION}
     mv kubeval /usr/local/bin && \
     rm kubeval-linux-amd64.tar.gz
 
-WORKDIR /root
-
 # Install kubectl completion
 # setup autocomplete in bash, bash-completion package should be installed first.
-RUN mkdir ~/.bash && kubectl completion bash > ~/.bash/kubectl.completion
-
-COPY dot-bashrc .bashrc
+RUN mkdir -p /opt/bash && kubectl completion bash > /opt/bash/kubectl.completion
 
 # Expose kubernetes dashboard
 EXPOSE 8001

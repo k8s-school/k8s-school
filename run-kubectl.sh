@@ -16,8 +16,6 @@ usage() {
 Usage: $(basename "$0") [options]
 Available options:
   -C            Command to launch inside container
-  -K            Path to k8s configuration file,
-                default to $DIR if readable
   -h            This message
 
 Run docker container containing k8s management tools (helm,
@@ -31,7 +29,6 @@ set -x
 while getopts hC:K: c ; do
     case $c in
         C) CMD="${OPTARG}" ;;
-        K) KUBECONFIG="${OPTARG}" ;;
         h) usage ; exit 0 ;;
         \?) usage ; exit 2 ;;
     esac
@@ -43,14 +40,8 @@ if [ $# -ne 0 ] ; then
     exit 2
 fi
 
-
-case "$KUBECONFIG" in
-    /*) ;;
-    *) echo "expect absolute path" ; exit 2 ;;
-esac
-
-# strip trailing slash
-KUBECONFIG=$(echo $KUBECONFIG | sed 's%\(.*[^/]\)/*%\1%')
+mkdir -p "$KUBECONFIG"
+mkdir -p "$DIR/dot-ssh"
 
 if [ ! -r "$KUBECONFIG" ]; then
     echo "ERROR: incorrect KUBECONFIG file: $KUBECONFIG"
@@ -59,17 +50,23 @@ fi
 
 if [ -z "${CMD}" ]
 then
-    BASH_OPTS="-it --volume "$DIR"/kubectl/scripts:/root/scripts"
     CMD="bash"
+    BASH_OPTS="-it"
 fi
 
 # Launch container
 #
 # Use host network to easily publish k8s dashboard
 IMAGE=k8sschool/kubectl
-docker pull "$IMAGE"
+MOUNTS="--volume "$DIR/dot-ssh":$HOME/.ssh"
+MOUNTS="$MOUNTS --volume "$KUBECONFIG":$HOME/.kube"
+MOUNTS="$MOUNTS --volume "$DIR"/kubectl/scripts:$HOME/scripts"
+MOUNTS="$MOUNTS --volume "$DIR"/kubectl/dot-bashrc:$HOME/.bashrc"
+MOUNTS="$MOUNTS --volume /etc/group:/etc/group:ro -v /etc/passwd:/etc/passwd:ro"
+
+# docker pull "$IMAGE"
 docker run $BASH_OPTS --net=host \
-    --rm \
-    --volume "$DIR/dot-ssh":/root/.ssh \
-    --volume "$KUBECONFIG":/root/.kube \
+    $MOUNTS --rm \
+    --user=$(id -u):$(id -g $USER) \
+    -w $HOME \
     "$IMAGE" $CMD
