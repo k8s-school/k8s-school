@@ -22,3 +22,5 @@ ZONE="europe-west2-a"
 NODE_FIRST_ID=17
 NODE_LAST_ID=24
 $DIR/manage-instances.sh $OPT $NODE_FIRST_ID $NODE_LAST_ID $ZONE
+
+ZONE="europe-westr3-a"
