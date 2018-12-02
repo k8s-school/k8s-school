@@ -10,6 +10,7 @@ set -e
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
 KUBECONFIG="$DIR"/dot-kube
+GCLOUDCONFIG="$DIR/dot-gcloud"
 
 usage() {
     cat << EOD
@@ -39,6 +40,7 @@ if [ $# -ne 0 ] ; then
     exit 2
 fi
 
+mkdir -p "$GCLOUDCONFIG"
 mkdir -p "$KUBECONFIG"
 mkdir -p "$DIR/dot-ssh"
 
@@ -58,6 +60,7 @@ fi
 # Use host network to easily publish k8s dashboard
 IMAGE=k8sschool/kubectl
 MOUNTS="--volume "$DIR/dot-ssh":$HOME/.ssh"
+MOUNTS="$MOUNTS -v $GCLOUDCONFIG:$HOME/.config"
 MOUNTS="$MOUNTS --volume "$KUBECONFIG":$HOME/.kube"
 MOUNTS="$MOUNTS --volume "$DIR"/kubectl:$HOME"
 MOUNTS="$MOUNTS --volume /etc/group:/etc/group:ro -v /etc/passwd:/etc/passwd:ro"
