@@ -1,3 +1,14 @@
+# Pre-requisite
+
+user gmail account must have roles below:
+```
+Compute OS Admin Login
+Compute OS Login
+Kubernetes Engine Developer
+Service Account User
+```
+See https://cloud.google.com/compute/docs/instances/managing-instance-access#configure_users for additional informations.
+
 # Init project
 
 ```
