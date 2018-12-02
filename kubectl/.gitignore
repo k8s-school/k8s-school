@@ -1,2 +1,3 @@
-/master.yaml
-/worker-*.yaml
+/examples
+/heapster
+/prometheus-operator

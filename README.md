@@ -50,10 +50,9 @@ http://localhost:8080/api/v1/namespaces/kube-system/services/kubernetes-dashboar
 git clone https://github.com/fjammes/k8s-school
 cd k8s-school
 # Retrieve examples
-./kubectl/scripts/clone-book-examples.sh
+./kubectl/clone-book-examples.sh
 # Run kubectl client in a Docker container
 ./run-kubectl.sh
-cd ./scripts/
 # Play with kubectl and yaml files :-)
 ```
 

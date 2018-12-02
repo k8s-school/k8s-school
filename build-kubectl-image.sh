@@ -15,5 +15,5 @@ echo $DIR
 
 # CACHE_OPT="--no-cache"
 
-docker build $CACHE_OPT --tag "$IMAGE" "$DIR/kubectl"
+docker build $CACHE_OPT --tag "$IMAGE" "$DIR"
 docker push "$IMAGE"

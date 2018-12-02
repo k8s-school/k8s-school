@@ -9,7 +9,7 @@ See https://github.com/coreos/prometheus-operator/blob/master/contrib/kube-prome
 
 ```
 # On workstation
-cd <path_to_repos>/k8s-school/kubectl/scripts/
+cd <path_to_repos>/k8s-school/kubectl
 git clone --single-branch --depth=1 -b master https://github.com/coreos/prometheus-operator.git
 
 And then, in kubectl container,  follow quickstart instructions:

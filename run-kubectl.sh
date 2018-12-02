@@ -5,7 +5,7 @@
 # @author  Fabrice Jammes
 
 set -e
-set -x
+# set -x
 
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
@@ -23,7 +23,6 @@ kubectl, ...) and scripts.
 
 EOD
 }
-set -x
 
 # Get the options
 while getopts hC:K: c ; do
@@ -60,11 +59,13 @@ fi
 IMAGE=k8sschool/kubectl
 MOUNTS="--volume "$DIR/dot-ssh":$HOME/.ssh"
 MOUNTS="$MOUNTS --volume "$KUBECONFIG":$HOME/.kube"
-MOUNTS="$MOUNTS --volume "$DIR"/kubectl/scripts:$HOME/scripts"
-MOUNTS="$MOUNTS --volume "$DIR"/kubectl/dot-bashrc:$HOME/.bashrc"
+MOUNTS="$MOUNTS --volume "$DIR"/kubectl:$HOME"
 MOUNTS="$MOUNTS --volume /etc/group:/etc/group:ro -v /etc/passwd:/etc/passwd:ro"
 
-# docker pull "$IMAGE"
+docker pull "$IMAGE"
+echo "oOoOoOoOoOo"
+echo "Welcome in kubectl container"
+echo "oOoOoOoOoOo"
 docker run $BASH_OPTS --net=host \
     $MOUNTS --rm \
     --user=$(id -u):$(id -g $USER) \
