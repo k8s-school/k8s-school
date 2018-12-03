@@ -34,10 +34,7 @@ kubectl get nodes
 
 # Get configuration file from dind cluster
 mkdir ~/src/k8s-school/dot-kube
-docker cp kube-master:/etc/kubernetes/admin.conf  ~/src/k8s-school/dot-kube/dindconfig
-cd ~/src/k8s-school/dot-kube
-ln -sf dindconfig config
-cd ..
+docker cp kube-master:/etc/kubernetes/admin.conf  ~/src/k8s-school/dot-kube/config
 
 # Run kubectl client inside container and play with k8s
 ./run-kubectl.sh
