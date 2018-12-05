@@ -1,6 +1,7 @@
-.*
-!.gitignore
-!.bashrc
+/.*
+!/.gitignore
+!/.bashrc
+!/.examples
 /examples
 /heapster
 /prometheus-operator
