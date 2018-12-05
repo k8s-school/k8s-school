@@ -66,9 +66,9 @@ MOUNTS="$MOUNTS --volume "$DIR"/kubectl:$HOME"
 MOUNTS="$MOUNTS --volume /etc/group:/etc/group:ro -v /etc/passwd:/etc/passwd:ro"
 
 docker pull "$IMAGE"
-echo "oOoOoOoOoOo"
-echo "Welcome in kubectl container"
-echo "oOoOoOoOoOo"
+echo "oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOo"
+echo "   Welcome in kubectl container"
+echo "oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOo"
 docker run $BASH_OPTS --net=host \
     $MOUNTS --rm \
     --user=$(id -u):$(id -g $USER) \
