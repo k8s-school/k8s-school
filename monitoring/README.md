@@ -1,28 +1,35 @@
-k8s monitoring
-==============
+# Google cloud platform
 
-# Prometheus
+Create a k8s cluster:
 
-## Installation procedure
-
-See https://github.com/coreos/prometheus-operator/blob/master/contrib/kube-prometheus/
-
-```
-# On workstation
-cd <path_to_repos>/k8s-school/kubectl
-git clone --single-branch --depth=1 -b master https://github.com/coreos/prometheus-operator.git
-
-And then, in kubectl container,  follow quickstart instructions:
-https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus#quickstart
+```shell
+# GKE users authentication
+$ gcloud container clusters get-credentials cluster-1 --zone us-central1-a --project MYPROJECT
 ```
 
-## Access Web UI
+# Install premetheus-operator 
 
-### Via kubectl proxy
+## Using helm
 
+```shell
+helm init
 
+###
+### hack for GKE
+###
+kubectl create serviceaccount --namespace kube-system tiller
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'   
+helm init --service-account tiller --upgrade
+###
+
+helm repo add coreos https://s3-eu-west-1.amazonaws.com/coreos-charts/stable/
+helm install coreos/prometheus-operator --name prometheus-operator --namespace monitoring
+helm install coreos/kube-prometheus --name kube-prometheus --set global.rbacEnable=true --namespace monitoring
+
+# Access via proxy
+kubectl port-forward -n monitoring kube-prometheus-grafana-6c9496d766-f86kp 3000
 ```
-kubectl port-forward -n monitoring grafana-5b68464b84-h9wx4 3000:3000
-```
 
-Credentials are admin, admin.
+Then follow documentation:
+https://itnext.io/kubernetes-monitoring-with-prometheus-in-15-minutes-8e54d1de2e13
