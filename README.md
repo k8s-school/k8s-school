@@ -47,7 +47,7 @@ http://localhost:8080/api/v1/namespaces/kube-system/services/kubernetes-dashboar
 ## Play with examples
 
 ```shell
-git clone https://github.com/fjammes/k8s-school
+git clone https://gitlab.com/fjammes/k8s-school
 cd k8s-school
 # Retrieve examples
 ./kubectl/clone-book-examples.sh
