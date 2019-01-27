@@ -24,12 +24,10 @@ sudo apt-get install curl docker.io git vim
 sudo vim /etc/group
 
 # Install dind cluster
-wget https://cdn.rawgit.com/kubernetes-sigs/kubeadm-dind-cluster/master/fixed/dind-cluster-v1.10.sh
-chmod +x dind-cluster-v1.10.sh
-./dind-cluster-v1.10.sh up
 
-# Test directly on host
-export PATH="$HOME/.kubeadm-dind-cluster:$PATH"
+Follow instructions at: https://github.com/kubernetes-sigs/kubeadm-dind-cluster#using-preconfigured-scripts
+
+```
 kubectl get nodes
 
 # Get configuration file from dind cluster
