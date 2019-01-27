@@ -20,7 +20,7 @@ gcloud config set project $PROJECT
 # Connect to instances
 
 ``` shell
-gcloud compute ssh student@sch-X
+gcloud compute ssh student@node-X
 ```
 
 # Follow Kubernetes install documentation 

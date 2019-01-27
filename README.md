@@ -33,8 +33,8 @@ export PATH="$HOME/.kubeadm-dind-cluster:$PATH"
 kubectl get nodes
 
 # Get configuration file from dind cluster
-mkdir ~/src/k8s-school/dot-kube
-docker cp kube-master:/etc/kubernetes/admin.conf  ~/src/k8s-school/dot-kube/config
+mkdir ~/src/k8s-school/homefs/.kube
+docker cp kube-master:/etc/kubernetes/admin.conf ~/src/k8s-school/homefs/.kube/config
 
 # Run kubectl client inside container and play with k8s
 ./run-kubectl.sh
