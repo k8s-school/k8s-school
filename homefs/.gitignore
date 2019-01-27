@@ -5,3 +5,6 @@
 /examples
 /heapster
 /prometheus-operator
+/.ssh
+/.config
+/.kube
