@@ -6,7 +6,7 @@ set -x
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
 OPT="-c"
-# OPT="-d"
+OPT="-d"
 
 ZONE="europe-west1-b"
 NODE_FIRST_ID=1
