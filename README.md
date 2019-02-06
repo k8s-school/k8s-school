@@ -28,7 +28,7 @@ sudo vim /etc/group
 Follow instructions at: https://github.com/kubernetes-sigs/kubeadm-dind-cluster#using-preconfigured-scripts
 
 # Get configuration file from dind cluster
-mkdir ~/src/k8s-school/homefs/.kube
+mkdir -p ~/src/k8s-school/homefs/.kube
 docker cp kube-master:/etc/kubernetes/admin.conf ~/src/k8s-school/homefs/.kube/config
 
 # Run kubectl client inside container and play with k8s
