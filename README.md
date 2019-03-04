@@ -37,9 +37,7 @@ docker cp kube-master:/etc/kubernetes/admin.conf ~/src/k8s-school/homefs/.kube/c
 ./run-kubectl.sh
 ```
 
-## Play with dashboard
-
-http://localhost:8080/api/v1/namespaces/kube-system/services/kubernetes-dashboard:/proxy
+Play with dashboard.
 
 ## Play with examples
 
