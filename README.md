@@ -22,11 +22,13 @@ sudo apt-get install curl docker.io git vim
 
 # then add current user to docker group and restart gnome session
 sudo vim /etc/group
+```
 
-# Install dind cluster
+### Install dind cluster
 
 Follow instructions at: https://github.com/kubernetes-sigs/kubeadm-dind-cluster#using-preconfigured-scripts
 
+```shell
 # Get configuration file from dind cluster
 mkdir -p ~/src/k8s-school/homefs/.kube
 docker cp kube-master:/etc/kubernetes/admin.conf ~/src/k8s-school/homefs/.kube/config
