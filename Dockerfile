@@ -46,6 +46,13 @@ RUN wget https://github.com/garethr/kubeval/releases/download/${KUBEVAL_VERSION}
     mv kubeval /usr/local/bin && \
     rm kubeval-linux-amd64.tar.gz
 
+RUN wget -q --show-progress --https-only --timestamping \
+    https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 \
+    https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 && \
+    chmod o+x cfssl_linux-amd64 cfssljson_linux-amd64 && \
+    mv cfssl_linux-amd64 /usr/local/bin/cfssl && \
+    mv cfssljson_linux-amd64 /usr/local/bin/cfssljson
+
 # Install kubectl completion
 # setup autocomplete in bash, bash-completion package should be installed first.
 RUN mkdir -p /opt/bash && kubectl completion bash > /opt/bash/kubectl.completion
