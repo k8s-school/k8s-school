@@ -34,7 +34,10 @@ mkdir -p ~/src/k8s-school/homefs/.kube
 docker cp kube-master:/etc/kubernetes/admin.conf ~/src/k8s-school/homefs/.kube/config
 
 # Run kubectl client inside container and play with k8s
+git clone https://gitlab.com/fjammes/k8s-school
+cd k8s-school
 ./run-kubectl.sh
+kubectl get nodes
 ```
 
 Play with dashboard.
@@ -42,12 +45,8 @@ Play with dashboard.
 ## Play with examples
 
 ```shell
-git clone https://gitlab.com/fjammes/k8s-school
-cd k8s-school
 # Retrieve examples
-./kubectl/clone-book-examples.sh
-# Run kubectl client in a Docker container
-./run-kubectl.sh
+./clone-book-examples.sh
 # Play with kubectl and yaml files :-)
 ```
 
