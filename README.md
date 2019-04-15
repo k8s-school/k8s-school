@@ -30,11 +30,13 @@ Follow instructions at: https://github.com/kubernetes-sigs/kubeadm-dind-cluster#
 
 ```shell
 # Get configuration file from dind cluster
+mkdir -p $HOME/src/k8s-school
+git clone https://gitlab.com/fjammes/k8s-school $HOME/src/k8s-school
 mkdir -p ~/src/k8s-school/homefs/.kube
 docker cp kube-master:/etc/kubernetes/admin.conf ~/src/k8s-school/homefs/.kube/config
 
 # Run kubectl client inside container and play with k8s
-git clone https://gitlab.com/fjammes/k8s-school
+
 cd k8s-school
 ./run-kubectl.sh
 kubectl get nodes
