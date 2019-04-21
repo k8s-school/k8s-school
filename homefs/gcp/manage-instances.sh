@@ -47,7 +47,7 @@ if [ "$CREATE" = true ]; then
         --zone="$ZONE" --machine-type="$MACHINE_TYPE" --subnet=default \
         --scopes=https://www.googleapis.com/auth/cloud-platform \
         --image=${IMAGE} \
-        --image-project=debian-cloud --boot-disk-size=10GB \
+        --image-project=${IMAGE_PROJECT} --boot-disk-size=10GB \
         --boot-disk-type=pd-standard \
         --boot-disk-device-name=instance-1
 elif [ "$CREATE" = false ]; then
