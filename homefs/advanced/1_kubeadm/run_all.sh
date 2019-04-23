@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 MASTER="node-1"
 NODES="node-2 node-3 node-4"
 

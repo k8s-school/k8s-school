@@ -1,3 +1,5 @@
+set -e
+
 VERSION=1.13.5-00
 DOCKER_VERSION=18.06.1-0ubuntu1.2~18.04.1
 apt-get update && apt-get install -y apt-transport-https curl
@@ -8,5 +10,5 @@ EOF
 apt-get update
 apt-get install -y kubelet="$VERSION" kubeadm="$VERSION" kubectl="$VERSION"
 apt-mark hold kubelet kubeadm kubectl
-apt-get install -y docker.io="$VERSION" ipvsadm
-apt autoremove
+apt-get install -y docker.io="$DOCKER_VERSION" ipvsadm
+apt-get -y autoremove
