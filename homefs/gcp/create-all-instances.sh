@@ -5,8 +5,34 @@ set -x
 
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
+usage() {
+    cat << EOD
+Usage: $(basename "$0") [options]
+Available options:
+  -D            Delete instances
+  -h            This message
+
+Create GCE instances
+
+EOD
+}
+
 OPT="-c"
-OPT="-d"
+
+# Get the options
+while getopts hD c ; do
+    case $c in
+        D) OPT="-d" ;;
+        h) usage ; exit 0 ;;
+        \?) usage ; exit 2 ;;
+    esac
+done
+shift "$((OPTIND-1))"
+
+if [ $# -ne 0 ] ; then
+    usage
+    exit 2
+fi
 
 ZONE="europe-west1-b"
 NODE_FIRST_ID=1

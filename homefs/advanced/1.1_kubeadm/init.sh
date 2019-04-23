@@ -1,1 +1,0 @@
-sudo kubeadm init --config=$PWD/kubeadm-config.yaml

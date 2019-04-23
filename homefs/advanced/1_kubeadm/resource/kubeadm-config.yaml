@@ -11,4 +11,3 @@ apiServer:
   - name: tokens
     hostPath: /etc/kubernetes/auth
     mountPath: /etc/kubernetes/auth
-    type: DirectoryOrCreate
