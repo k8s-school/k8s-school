@@ -36,7 +36,7 @@ fi
 
 ZONE="europe-west1-b"
 NODE_FIRST_ID=1
-NODE_LAST_ID=4
+NODE_LAST_ID=3
 $DIR/manage-instances.sh $OPT $NODE_FIRST_ID $NODE_LAST_ID $ZONE
 
 #ZONE="europe-north1-a"
