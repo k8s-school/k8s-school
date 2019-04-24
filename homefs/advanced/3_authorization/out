@@ -1,0 +1,191 @@
++ dirname ./1_RBAC_role.sh
++ cd .
++ pwd -P
++ DIR=/home/fjammes/advanced/3_authorization
++ kubectl delete ns -l RBAC=role
+namespace "bar" deleted
+namespace "foo" deleted
++ kubectl create ns foo
+namespace/foo created
++ kubectl create ns bar
+namespace/bar created
++ kubectl label ns foo bar RBAC=role
+namespace/foo labeled
+namespace/bar labeled
++ kubectl create deployment microbot --image=dontrebootme/microbot:v1 -n foo
+deployment.apps/microbot created
++ kubectl expose deployment microbot -n foo --type=NodePort --port=80 --name=microbot-service
+service/microbot-service exposed
++ kubectl run --generator=run-pod/v1 shell --image=luksa/kubectl-proxy -n bar
+pod/shell created
++ true
++ sleep 2
++ kubectl get pods -n bar shell -o jsonpath={.status.phase}
++ STATUS=Pending
++ [ Pending = Running ]
++ true
++ sleep 2
++ kubectl get pods -n bar shell -o jsonpath={.status.phase}
++ STATUS=Running
++ [ Running = Running ]
++ break
++ kubectl exec -it -n bar shell curl microbot-service.foo
+<!DOCTYPE html>
+<html>
+  <style type="text/css">
+    .centered
+      {
+      text-align:center;
+      margin-top:0px;
+      margin-bottom:0px;
+      padding:0px;
+      }
+  </style>
+  <body>
+    <p class="centered"><img src="microbot.png" alt="microbot"/></p>
+    <p class="centered">Container hostname: microbot-7c7594fb4-44lf9</p>
+  </body>
+</html>
++ kubectl config current-context
++ kubectl config set-context kubernetes-admin@kubernetes --namespace=foo
+Context "kubernetes-admin@kubernetes" modified.
++ kubectl run --generator=run-pod/v1 shell --image=luksa/kubectl-proxy -n foo
+pod/shell created
++ true
++ sleep 2
++ kubectl get pods -n foo shell -o jsonpath={.status.phase}
++ STATUS=Pending
++ [ Pending = Running ]
++ true
++ sleep 2
++ kubectl get pods -n foo shell -o jsonpath={.status.phase}
++ STATUS=Running
++ [ Running = Running ]
++ break
++ kubectl exec -it -n foo shell curl localhost:8001/api/v1/namespaces/foo/services
+{
+  "kind": "Status",
+  "apiVersion": "v1",
+  "metadata": {
+    
+  },
+  "status": "Failure",
+  "message": "services is forbidden: User \"system:serviceaccount:foo:default\" cannot list resource \"services\" in API group \"\" in the namespace \"foo\"",
+  "reason": "Forbidden",
+  "details": {
+    "kind": "services"
+  },
+  "code": 403
+}+ kubectl apply -f /home/fjammes/advanced/3_authorization/manifest/service-reader.yaml
+role.rbac.authorization.k8s.io/service-reader created
++ kubectl create role service-reader --verb=get --verb=list --resource=services -n bar
+role.rbac.authorization.k8s.io/service-reader created
++ kubectl create rolebinding service-reader-rb --role=service-reader --serviceaccount=foo:default -n foo
+rolebinding.rbac.authorization.k8s.io/service-reader-rb created
++ kubectl exec -it -n foo shell curl localhost:8001/api/v1/namespaces/foo/services
+{
+  "kind": "ServiceList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/foo/services",
+    "resourceVersion": "4435"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "microbot-service",
+        "namespace": "foo",
+        "selfLink": "/api/v1/namespaces/foo/services/microbot-service",
+        "uid": "d7737733-66e4-11e9-8124-cedcf93b5f3b",
+        "resourceVersion": "4393",
+        "creationTimestamp": "2019-04-24T23:01:06Z",
+        "labels": {
+          "app": "microbot"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "protocol": "TCP",
+            "port": 80,
+            "targetPort": 80,
+            "nodePort": 30926
+          }
+        ],
+        "selector": {
+          "app": "microbot"
+        },
+        "clusterIP": "10.100.93.181",
+        "type": "NodePort",
+        "sessionAffinity": "None",
+        "externalTrafficPolicy": "Cluster"
+      },
+      "status": {
+        "loadBalancer": {
+          
+        }
+      }
+    }
+  ]
+}+ kubectl exec -it -n bar shell curl localhost:8001/api/v1/namespaces/foo/services
+{
+  "kind": "Status",
+  "apiVersion": "v1",
+  "metadata": {
+    
+  },
+  "status": "Failure",
+  "message": "services is forbidden: User \"system:serviceaccount:bar:default\" cannot list resource \"services\" in API group \"\" in the namespace \"foo\"",
+  "reason": "Forbidden",
+  "details": {
+    "kind": "services"
+  },
+  "code": 403
+}+ kubectl patch rolebindings.rbac.authorization.k8s.io -n foo service-reader-rb --type=json -p=[{"op": "add", "path": "/subjects/-", "value": {"kind": "ServiceAccount","name": "default","namespace": "bar"} }]
+rolebinding.rbac.authorization.k8s.io/service-reader-rb patched
++ kubectl exec -it -n bar shell curl localhost:8001/api/v1/namespaces/foo/services
+{
+  "kind": "ServiceList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/foo/services",
+    "resourceVersion": "4437"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "microbot-service",
+        "namespace": "foo",
+        "selfLink": "/api/v1/namespaces/foo/services/microbot-service",
+        "uid": "d7737733-66e4-11e9-8124-cedcf93b5f3b",
+        "resourceVersion": "4393",
+        "creationTimestamp": "2019-04-24T23:01:06Z",
+        "labels": {
+          "app": "microbot"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "protocol": "TCP",
+            "port": 80,
+            "targetPort": 80,
+            "nodePort": 30926
+          }
+        ],
+        "selector": {
+          "app": "microbot"
+        },
+        "clusterIP": "10.100.93.181",
+        "type": "NodePort",
+        "sessionAffinity": "None",
+        "externalTrafficPolicy": "Cluster"
+      },
+      "status": {
+        "loadBalancer": {
+          
+        }
+      }
+    }
+  ]
+}
