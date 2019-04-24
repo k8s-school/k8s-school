@@ -22,6 +22,7 @@ $SSH "$MASTER" -- sh /tmp/resource/init.sh
 
 echo "Join nodes"
 echo "----------"
+# TODO test '-ttl' option
 JOIN_CMD=$($SSH "$MASTER" -- 'sudo kubeadm token create --print-join-command')
 echo "Join command: $JOIN_CMD"
 parallel -vvv --tag -- "$SSH {} -- sudo '$JOIN_CMD'" ::: $NODES
