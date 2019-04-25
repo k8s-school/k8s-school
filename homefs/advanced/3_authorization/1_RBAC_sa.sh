@@ -3,8 +3,8 @@
 set -e
 set -x
 
-# RBAC
-# see "kubernetes in action" p357
+# RBAC sa
+# see "kubernetes in action" p346
 
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
