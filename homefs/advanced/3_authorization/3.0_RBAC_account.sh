@@ -46,6 +46,3 @@ kubectl --context=employee-context get pods
 
 kubectl --context=employee-context get pods --namespace=default || \
     >&2 echo "ERROR to get pods"
-
-
-
