@@ -1,41 +1,47 @@
 #!/bin/sh
 
+set -e
+set -x
+
 # RBAC clusterrole
 # see "kubernetes in action" p362
 
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
-# Delete all namespaces, clusterrole with label 'RBAC=role' to make current script idempotent
-kubectl delete ns -l RBAC=clusterrole
-kubectl delete clusterrole -l RBAC=clusterrole
+# Delete all namespaces, clusterrole, clusterrolebinding, pv
+# with label 'RBAC=role' to make current script idempotent
+kubectl delete pv,ns,clusterrole,clusterrolebinding -l RBAC=clusterrole
 
 # Create namespace 'foo' in yaml, with label "RBAC=clusterrole"
-sudo cat <<EOF >/tmp/ns_foo.yaml
+cat <<EOF >/tmp/ns_foo.yaml
+apiVersion: v1
 kind: Namespace
 metadata:
   name: foo
-  label:
+  labels:
     RBAC: clusterrole
 EOF
 kubectl apply -f "/tmp/ns_foo.yaml"
 
-# Create a local persistent volume on kube-node-1:/data/disk1
+# Create a local PersistentVolume on kube-node-1:/data/disk1
 # with label "RBAC=clusterrole"
 # see https://kubernetes.io/docs/concepts/storage/volumes/#local
-sudo cat <<EOF >/tmp/pv.yaml
+# WARN: Directory kube-node-1:/data/disk1, must exist, 
+# for next exercice, create also kube-node-1:/data/disk2
+cat <<EOF >/tmp/pv-1.yaml
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: pv-1
-  label:
+  labels:
     RBAC: clusterrole
 spec:
   capacity:
-    storage: 100Gi
+    storage: 10Gi
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Delete
+  persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
     path: /data/disk1
@@ -48,7 +54,7 @@ spec:
           values:
           - kube-node-1
 EOF
-kubectl apply -f "/tmp/pv.yaml"
+kubectl apply -f "/tmp/pv-1.yaml"
 
 # Create clusterrole 'pv-reader' which can get and list resource 'persistentvolumes'
 kubectl create clusterrole pv-reader --verb=get,list --resource=persistentvolumes
@@ -73,4 +79,16 @@ done
 kubectl exec -it -n foo shell curl localhost:8001/api/v1/persistentvolumes
 
 # Create rolebinding 'pv-reader' which can get and list resource 'persistentvolumes'
-kubectl create rolebinding pv-test --clusterrole=pv-reader --serviceaccount=foo:default -n foo
+kubectl create rolebinding pv-reader --clusterrole=pv-reader --serviceaccount=foo:default -n foo
+
+# List again persistentvolumes at the cluster scope, with user "system:serviceaccount:foo:default"
+kubectl exec -it -n foo shell curl localhost:8001/api/v1/persistentvolumes
+
+# Why does it not work? Find the solution.
+kubectl delete rolebinding pv-reader -n foo
+kubectl create clusterrolebinding pv-reader --clusterrole=pv-reader --serviceaccount=foo:default -n foo
+kubectl label clusterrolebinding pv-reader "RBAC=clusterrole"
+
+# List again persistentvolumes at the cluster scope, with user "system:serviceaccount:foo:default"
+kubectl exec -it -n foo shell curl localhost:8001/api/v1/persistentvolumes
+
