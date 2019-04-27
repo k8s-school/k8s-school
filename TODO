@@ -1,0 +1,3 @@
+- Dimension GKE cluster (20GB RAM + 4 CPU), remove internal 'fluentd + prom + heapster + state-metrics'
+- improve script
+- set local-storage class in RBAC
