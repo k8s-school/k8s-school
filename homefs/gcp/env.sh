@@ -15,3 +15,5 @@ EU_CLUSTERS="cluster-4 cluster-5 cluster-6"
 US_REGION="us-central1-a"
 EU_REGION="europe-north1-a"
 
+CLUSTER="cluster-1"
+REGION="us-central1-a"
