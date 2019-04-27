@@ -1,5 +1,0 @@
-- +++++ Network policy
-- +++++ update/upgrade Node + plane (stratégie et mise en place)
-- +++   vault de hashicorp si tu connais
-- ++++  promeutheus
-- ++    mecanisme d'export sur  logs (ELK)  si tu connais
