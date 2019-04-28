@@ -23,9 +23,10 @@ EOD
 }
 
 # Get the options
-while getopts hC:K: c ; do
+while getopts hC:d c ; do
     case $c in
         C) CMD="${OPTARG}" ;;
+        d) DEV=true ;;
         h) usage ; exit 0 ;;
         \?) usage ; exit 2 ;;
     esac
@@ -47,6 +48,10 @@ fi
 #
 # Use host network to easily publish k8s dashboard
 IMAGE=k8sschool/kubectl
+if [ "$DEV" = true ]; then
+    echo "Running in development mode"
+    MOUNTS="$MOUNTS -v $DIR/rootfs/opt:/opt"
+fi
 MOUNTS="$MOUNTS --volume "$DIR"/homefs:$HOME"
 MOUNTS="$MOUNTS --volume /etc/group:/etc/group:ro -v /etc/passwd:/etc/passwd:ro"
 

@@ -57,5 +57,7 @@ RUN wget -q --show-progress --https-only --timestamping \
 # setup autocomplete in bash, bash-completion package should be installed first.
 RUN mkdir -p /opt/bash && kubectl completion bash > /opt/bash/kubectl.completion
 
+COPY rootfs /
+
 # Expose kubernetes dashboard
 EXPOSE 8001
