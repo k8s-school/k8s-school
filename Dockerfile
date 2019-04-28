@@ -55,7 +55,7 @@ RUN wget -q --show-progress --https-only --timestamping \
 
 # Install kubectl completion
 # setup autocomplete in bash, bash-completion package should be installed first.
-RUN mkdir -p /opt/bash && kubectl completion bash > /opt/bash/kubectl.completion
+RUN kubectl completion bash > /etc/kubectl.completion
 
 COPY rootfs /
 

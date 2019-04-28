@@ -8,3 +8,5 @@
 /.ssh
 /.config
 /.kube
+/kubernetes-in-action
+/k8s-advanced

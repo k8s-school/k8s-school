@@ -3,7 +3,9 @@
 PS1="\u@[kubectl]:\w # "
 
 # k8s cli helpers
-. /opt/bash/kubectl.completion
+. /etc/kubectl.completion
 alias k='kubectl'
 
 alias ssh="gcloud compute ssh"
+
+export PATH="/opt/bin:$PATH"
