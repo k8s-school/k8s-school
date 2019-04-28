@@ -119,6 +119,8 @@ func main() {
 
     project := "coastal-sunspot-206412"
 
+    nb_clusters := 2
+
     clusters :=  make([]Cluster, 0)
     regionzones :=  make([]RegionZone, 0)
 
@@ -132,7 +134,7 @@ func main() {
     zones = []rune{'a', 'a'}
     regionzones = appendRegionZones(regionzones, prefix, idxs, zones)
 
-    for i, rz := range regionzones {
+    for i, rz := range regionzones[0:nb_clusters] {
         name := fmt.Sprintf("cluster-%v", i)
         region := rz.region
         zone := rz.zone
