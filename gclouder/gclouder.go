@@ -72,12 +72,13 @@ func CreateCluster(cluster Cluster, c chan OutMsg) {
     --scopes "https://www.googleapis.com/auth/devstorage.read_only","https://www.googleapis.com/auth/logging.write","https://www.googleapis.com/auth/monitoring","https://www.googleapis.com/auth/servicecontrol","https://www.googleapis.com/auth/service.management.readonly","https://www.googleapis.com/auth/trace.append" \
     --preemptible --num-nodes "%v" --no-enable-cloud-logging --no-enable-cloud-monitoring \
     --no-enable-ip-alias --network "%v" --subnetwork "%v" \
-    --enable-autoscaling --min-nodes "%v" --max-nodes "%v" \
+	--enable-autoscaling --min-nodes "%v" --max-nodes "%v" \
+	--enable-pod-security-policy \
     --addons HorizontalPodAutoscaling,HttpLoadBalancing --enable-autoupgrade --enable-autorepair`
 
 	cmd := fmt.Sprintf(cmd_tpl, cluster.project, cluster.name, cluster.zone, cluster.machineType,
-		cluster.num_nodes, cluster.network, cluster.subnetwork, cluster.min_nodes,
-		cluster.max_nodes)
+		cluster.nbInstance, cluster.network, cluster.subnetwork, cluster.minNodes,
+		cluster.maxNodes)
 
 	err, out, errout := Shellout(cmd)
 	if err != nil {
@@ -94,15 +95,14 @@ func CreateCluster(cluster Cluster, c chan OutMsg) {
 	c <- outmsg
 }
 
-func BuildClusterList(nbCluster int, project string, regionzones []RegionZone) []Cluster {
+func BuildClusterList(nbCluster int, nbInstance int, machineType string, project string,
+	regionzones []RegionZone) []Cluster {
 
 	clusters := make([]Cluster, 0)
 	for i, rz := range regionzones[0:nbCluster] {
-		name := fmt.Sprintf("cluster-%v", i)
+		name := fmt.Sprintf("gke%v", i)
 		region := rz.region
 		zone := rz.zone
-		machineType := "n1-standard-2"
-		numNodes := 2
 		network := fmt.Sprintf("projects/%v/global/networks/default", project)
 		subnetwork := fmt.Sprintf("projects/%v/regions/%v/subnetworks/default", project, region)
 		minNodes := 2
@@ -114,17 +114,17 @@ func BuildClusterList(nbCluster int, project string, regionzones []RegionZone) [
 			region:      region,
 			zone:        zone,
 			machineType: machineType,
-			num_nodes:   numNodes,
+			nbInstance:  nbInstance,
 			network:     network,
 			subnetwork:  subnetwork,
-			min_nodes:   minNodes,
-			max_nodes:   maxNodes}
+			minNodes:    minNodes,
+			maxNodes:    maxNodes}
 		clusters = append(clusters, c)
 	}
 	return clusters
 }
 
-func BuildInstanceClusterList(nbInstanceCluster int, nbInstance int, project string,
+func BuildInstanceClusterList(nbInstanceCluster int, nbInstance int, machineType string, project string,
 	regionzones []RegionZone) []InstanceCluster {
 	// Create a list of InstanceCluster,
 	// where InstanceCluster represents of group of GCE instance in the same RegioZone
@@ -133,7 +133,6 @@ func BuildInstanceClusterList(nbInstanceCluster int, nbInstance int, project str
 		name := fmt.Sprintf("cluster%v", i)
 		region := rz.region
 		zone := rz.zone
-		machineType := "n1-standard-2"
 		image := "ubuntu-1804-bionic-v20190404"
 		imageProject := "ubuntu-os-cloud"
 
@@ -151,16 +150,22 @@ func BuildInstanceClusterList(nbInstanceCluster int, nbInstance int, project str
 	return instanceClusters
 }
 
-func CreateInstanceClusters(instanceClusters []InstanceCluster) error {
+func CreateAllClusters(instanceClusters []InstanceCluster, clusters []Cluster) error {
 	// var err_msgs string
 	var errOut error
 
-	log.Printf("Create %v instance clusters", len(instanceClusters))
+	log.Printf("Create %v vm clusters", len(instanceClusters))
 	chans := make([]chan OutMsg, 0)
 	for _, instanceCluster := range instanceClusters {
 		c := make(chan OutMsg)
 		chans = append(chans, c)
 		go CreateInstanceCluster(instanceCluster, c)
+	}
+	log.Printf("Create %v k8s clusters", len(clusters))
+	for _, cluster := range clusters {
+		c := make(chan OutMsg)
+		chans = append(chans, c)
+		go CreateCluster(cluster, c)
 	}
 	for _, c := range chans {
 		outmsg := <-c
@@ -174,44 +179,17 @@ func CreateInstanceClusters(instanceClusters []InstanceCluster) error {
 	return errOut
 }
 
-func CreateClusters(clusters []Cluster) error {
-	// var err_msgs string
-	var err_out error
-
-	log.Printf("Create %v clusters", len(clusters))
-	chans := make([]chan OutMsg, 0)
-	for _, cluster := range clusters {
-		c := make(chan OutMsg)
-		chans = append(chans, c)
-		go CreateCluster(cluster, c)
-		// err := CreateCluster(c)
-		// if err != nil {
-		//     err_msgs = fmt.Sprintf("%v %v", err_msgs, err)
-		// }
-	}
-	for _, c := range chans {
-		outmsg := <-c
-		log.Println(outmsg.cmd)
-		log.Println(outmsg.out)
-		if outmsg.err != nil {
-			log.Println(outmsg.err)
-			log.Println(outmsg.errout)
-		}
-	}
-	return err_out
-}
-
 type Cluster struct {
 	project     string
 	name        string
 	region      string
 	zone        string
 	machineType string
-	num_nodes   int
+	nbInstance  int
 	network     string
 	subnetwork  string
-	min_nodes   int
-	max_nodes   int
+	minNodes    int
+	maxNodes    int
 }
 
 type InstanceCluster struct {
