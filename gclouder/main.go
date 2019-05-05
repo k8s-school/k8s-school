@@ -16,7 +16,7 @@ func main() {
 
 	// Number of instances cluster to create
 	numVirtualClusterPtr := flag.Int("vm", 1, "Number of virtual machine clusters")
-	numVirtualPtr := flag.Int("num-vms", 2, "Number of instances in each virtual machine cluster")
+	numVirtualPtr := flag.Int("num-vms", 3, "Number of instances in each virtual machine cluster")
 	flag.Parse()
 
 	regionzones := make([]RegionZone, 0)
