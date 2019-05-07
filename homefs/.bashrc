@@ -8,4 +8,6 @@ alias k='kubectl'
 
 alias ssh="gcloud compute ssh"
 
-export PATH="/opt/bin:$PATH"
+export PATH=/opt/bin:$GOPATH/bin:$GOROOT/bin:$PATH
+
+go get -v github.com/fjammes/clouder

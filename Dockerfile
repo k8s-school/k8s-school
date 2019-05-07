@@ -53,6 +53,17 @@ RUN wget -q --show-progress --https-only --timestamping \
     mv cfssl_linux-amd64 /usr/local/bin/cfssl && \
     mv cfssljson_linux-amd64 /usr/local/bin/cfssljson
 
+ENV GO_VERSION 1.12.2
+ENV GO_PKG go${GO_VERSION}.linux-amd64.tar.gz
+RUN wget https://dl.google.com/go/$GO_PKG && \
+    tar -xvf $GO_PKG && \
+    mv go /usr/local
+
+ENV GOROOT /usr/local/go
+ENV GOPATH /go
+
+RUN $GOROOT/bin/go get -v github.com/fjammes/clouder
+
 # Install kubectl completion
 # setup autocomplete in bash, bash-completion package should be installed first.
 RUN kubectl completion bash > /etc/kubectl.completion
