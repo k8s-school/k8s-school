@@ -27,7 +27,7 @@ RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
 ENV HELM_VERSION 2.13.1
 RUN wget -O /tmp/helm.tgz \
     https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
-    cd tmp && \
+    cd /tmp && \
     tar zxvf /tmp/helm.tgz && \
     chmod +x /tmp/linux-amd64/helm && \
     mv /tmp/linux-amd64/helm /usr/local/bin/helm-${HELM_VERSION} && \
