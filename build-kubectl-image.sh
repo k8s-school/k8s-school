@@ -15,5 +15,5 @@ echo $DIR
 
 # CACHE_OPT="--no-cache"
 
-docker build $CACHE_OPT --tag "$IMAGE" "$DIR"
+docker build --build-arg FORCE_GO_REBUILD="$(date)" --tag "$IMAGE" "$DIR"
 docker push "$IMAGE"

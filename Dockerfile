@@ -62,7 +62,6 @@ RUN wget https://dl.google.com/go/$GO_PKG && \
 ENV GOROOT /usr/local/go
 ENV GOPATH /go
 
-RUN $GOROOT/bin/go get -v github.com/fjammes/clouder
 
 # Install kubectl completion
 # setup autocomplete in bash, bash-completion package should be installed first.
@@ -72,3 +71,6 @@ COPY rootfs /
 
 # Expose kubernetes dashboard
 EXPOSE 8001
+
+ARG FORCE_GO_REBUILD=false
+RUN $GOROOT/bin/go get -v github.com/fjammes/clouder
