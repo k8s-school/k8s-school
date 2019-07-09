@@ -3,6 +3,7 @@
 # Course
 
 All materials are [here](https://drive.google.com/open?id=0B-VJpOQeezDjZktuTnlEMEpGMUU)
+Free kubernetes icons: https://github.com/octo-technology/kubernetes-icons
 
 # Solutions for installing kubernetes
 
