@@ -38,7 +38,7 @@ docker cp kube-master:/etc/kubernetes/admin.conf ~/src/k8s-school/homefs/.kube/c
 
 # Run kubectl client inside container and play with k8s
 
-cd k8s-school
+cd src/k8s-school
 ./run-kubectl.sh
 kubectl get nodes
 ```
