@@ -3,6 +3,7 @@
 # Course
 
 All materials are [here](https://drive.google.com/open?id=0B-VJpOQeezDjZktuTnlEMEpGMUU)
+
 Free kubernetes icons: https://github.com/octo-technology/kubernetes-icons
 
 # Solutions for installing kubernetes
@@ -25,16 +26,26 @@ sudo apt-get install curl docker.io git vim
 sudo vim /etc/group
 ```
 
-### Install dind cluster
+### Install kind cluster
 
-Follow instructions at: https://github.com/kubernetes-sigs/kubeadm-dind-cluster#using-preconfigured-scripts
+
+Use automated procedure below (sudo access required)
 
 ```shell
-# Get configuration file from dind cluster
+git clone https://github.com/fjammes/kind-travis-ci
+cd kind-travis-ci
+./kind/k8s-create.sh
+```
+or follow official instructions at: https://github.com/kubernetes-sigs/kind
+
+Then configure the container used during the school (i.e. Kubernetes client and tooling):
+```shell
+# Get configuration file from kind cluster
 mkdir -p $HOME/src/k8s-school
 git clone https://gitlab.com/fjammes/k8s-school $HOME/src/k8s-school
 mkdir -p ~/src/k8s-school/homefs/.kube
-docker cp kube-master:/etc/kubernetes/admin.conf ~/src/k8s-school/homefs/.kube/config
+export KUBECONFIG=$(kind get kubeconfig-path --name="kind")
+cp "$KUBECONFIG" ~/src/k8s-school/homefs/.kube/config
 
 # Run kubectl client inside container and play with k8s
 
