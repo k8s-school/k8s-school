@@ -16,7 +16,7 @@ https://kubernetes.io/docs/setup/pick-right-solution/#bare-metal
 
 ### Set up local machine
 
-Depending on your linux distribution version, you might have to upgrade to docker-ce:
+Ubuntu LTS is recommended. However, depending on your linux distribution version, you might have to upgrade to docker-ce:
 https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
 
 ```shell
