@@ -41,15 +41,15 @@ or follow official instructions at: https://github.com/kubernetes-sigs/kind
 Then configure the container used during the school (i.e. Kubernetes client and tooling):
 ```shell
 # Get configuration file from kind cluster
-mkdir -p $HOME/src/k8s-school
-git clone https://gitlab.com/fjammes/k8s-school $HOME/src/k8s-school
-mkdir -p ~/src/k8s-school/homefs/.kube
+SCHOOL="$HOME/src/k8s-school"
+mkdir -p "$SCHOOL"
+git clone https://gitlab.com/fjammes/k8s-school "$SCHOOL"
+mkdir -p "$SCHOOL/homefs/.kube"
 export KUBECONFIG=$(kind get kubeconfig-path --name="kind")
-cp "$KUBECONFIG" ~/src/k8s-school/homefs/.kube/config
+cp "$KUBECONFIG" "$SCHOOL/homefs/.kube/config"
 
 # Run kubectl client inside container and play with k8s
-
-cd src/k8s-school
+cd "$SCHOOL"
 ./run-kubectl.sh
 kubectl get nodes
 ```
