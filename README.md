@@ -54,8 +54,6 @@ cd src/k8s-school
 kubectl get nodes
 ```
 
-Play with dashboard.
-
 ## Play with examples
 
 ```shell
