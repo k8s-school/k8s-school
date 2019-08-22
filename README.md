@@ -16,7 +16,8 @@ https://kubernetes.io/docs/setup/pick-right-solution/#bare-metal
 
 ### Set up local machine
 
-- Ubuntu LTS is recommended. 
+- Ubuntu LTS is recommended
+- 8 cores, 16 GB RAM
 - Internet access without proxy
 - `sudo` access
 - Install dependencies below:
