@@ -16,15 +16,19 @@ https://kubernetes.io/docs/setup/pick-right-solution/#bare-metal
 
 ### Set up local machine
 
-Ubuntu LTS is recommended. However, depending on your linux distribution version, you might have to upgrade to docker-ce:
-https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
-
+- Ubuntu LTS is recommended. 
+- Internet access without proxy
+- `sudo` access
+- Install dependencies below:
 ```shell
 sudo apt-get install curl docker.io git vim
 
 # then add current user to docker group and restart gnome session
 sudo vim /etc/group
 ```
+However, depending on your linux distribution version, you might have to upgrade to docker-ce:
+https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
+
 
 ### Install kind cluster
 
