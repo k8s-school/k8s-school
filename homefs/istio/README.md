@@ -95,9 +95,9 @@ $ helm ls
 
 # Istio Demos
 - [Sidecar injection](https://gitlab.com/fjammes/k8s-school/blob/master/homefs/istio/sidecar_injection.md)
-    - Manual
-    - Automatic
+    - [Manual](https://gitlab.com/fjammes/k8s-school/blob/master/homefs/istio/sidecar_injection.md#manual)
+    - [Automatic](https://gitlab.com/fjammes/k8s-school/blob/master/homefs/istio/sidecar_injection.md#automatic)
 - [Traffic management](https://gitlab.com/fjammes/k8s-school/blob/master/homefs/istio/traffic_management.md)
-    - Deploy the bookinfo sample application
+    - [Deploy the bookinfo sample application](https://gitlab.com/fjammes/k8s-school/blob/master/homefs/istio/traffic_management.md#task-1-deploy-the-bookinfo-sample-application)
 
 
