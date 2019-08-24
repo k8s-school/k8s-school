@@ -92,3 +92,12 @@ $ helm ls
     NAME            REVISION        UPDATED                         STATUS          CHART                   APP VERSION     NAMESPACE
     istio           1               Sun Aug 18 16:15:45 2019        DEPLOYED        istio-1.2.4             1.2.4           istio-system
     istio-init      1               Sun Aug 18 16:13:49 2019        DEPLOYED        istio-init-1.2.4        1.2.4           istio-system
+
+# Istio Demos
+- [Sidecar injection](https://gitlab.com/fjammes/k8s-school/blob/master/homefs/istio/sidecar_injection.md)
+    - Manual
+    - Automatic
+- [Traffic management](https://gitlab.com/fjammes/k8s-school/blob/master/homefs/istio/traffic_management.md)
+    - Deploy the bookinfo sample application
+
+
