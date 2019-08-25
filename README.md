@@ -17,7 +17,7 @@ https://kubernetes.io/docs/setup/pick-right-solution/#bare-metal
 ### Set up local machine
 
 - Ubuntu LTS is recommended
-- 8 cores, 16 GB RAM, 30 GB disk space for '/' (root) partition
+- 8 cores, 16 GB RAM, 30G for the partition hosting docker entities (images, volumes, containers, etc). Use `df –h /var/lib/docker` command to find its size.
 - Internet access without proxy
 - `sudo` access
 - Install dependencies below:
