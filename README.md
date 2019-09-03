@@ -1,6 +1,9 @@
 # k8s-school
 
-[Website](https://www.k8s-school.fr)
+[WWW](https://www.k8s-school.fr)
+
+![K8s-school Logo](http://k8s-school.fr/images/logo.svg "K8s-school, expertise et formation Kubernetes"")
+
 
 # Course
 
