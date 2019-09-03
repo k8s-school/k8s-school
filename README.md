@@ -1,5 +1,10 @@
 # k8s-school
 
+[WWW](https://www.k8s-school.fr)
+
+![K8s-school Logo](http://k8s-school.fr/images/logo.svg "K8s-school, expertise et formation Kubernetes")
+
+
 # Course
 
 All materials are [here](https://drive.google.com/open?id=0B-VJpOQeezDjZktuTnlEMEpGMUU)
