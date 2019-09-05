@@ -3,11 +3,13 @@
 set -e
 set -x
 
+ISTIO_VERSION=1.2.4
+NS=istio-system
+
 # Helm auto completion:
 source <(helm completion bash)
 echo 'source <(helm completion bash)' >> ~/.bashrc
 
-ISTIO_VERSION=1.2.4
 echo "Download istio (version $ISTIO_VERSION)"
 curl -L https://git.io/getLatestIstio | ISTIO_VERSION="$ISTIO_VERSION" sh -
 cd istio-"$ISTIO_VERSION"
@@ -22,15 +24,12 @@ helm install install/kubernetes/helm/istio-init --name istio-init --namespace is
 
 echo "Wait until all pods' status are **Completed**"
 
-NS=istio-system
-# Wait for $NS:shell to be in running state
+
+# Wait for all pods to be in running state
 while true
 do
     sleep 2
-    STATUS=$(kubectl get pods -n $NS -o jsonpath="{.status.phase}")
-    if [ "$STATUS" = "Running" ]; then
-        break
-    fi
+    kubectl get pods -n istio-system  -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.phase}{"\n"}{end}' | egrep -v "Completed" || break
 done
 
 echo "Verify that all 23 Istio CRDs were committed to the Kubernetes api-server"
@@ -49,8 +48,13 @@ helm install install/kubernetes/helm/istio --name istio --namespace istio-system
 --set prometheus.enabled=true \
 --set prometheus.service.nodePort.enabled=true
 
-echo "Wait until all pods' status are **Completed** or **Running**. This step takes a longer time then previous ones."
-kubectl -n istio-system get pods
+echo "Wait until all pods' status are **Completed** or **Running** or **Succeeded**. This step takes a longer time then previous ones."
+while true
+do
+    sleep 2
+    kubectl get pods -n istio-system  -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.phase}{"\n"}{end}' | egrep -v "Running|Completed|Succeeded" || break
+done
+
 
 echo "Ensure all Helm charts (istio-init and istio) are correctly deployed to kubernetes cluster"
 helm ls
