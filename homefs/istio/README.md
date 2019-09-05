@@ -94,10 +94,10 @@ $ helm ls
     istio-init      1               Sun Aug 18 16:13:49 2019        DEPLOYED        istio-init-1.2.4        1.2.4           istio-system
 
 # Istio Demos
-- [Sidecar injection](https://gitlab.com/fjammes/k8s-school/blob/master/homefs/istio/sidecar_injection.md)
-    - [Manual](https://gitlab.com/fjammes/k8s-school/blob/master/homefs/istio/sidecar_injection.md#manual)
-    - [Automatic](https://gitlab.com/fjammes/k8s-school/blob/master/homefs/istio/sidecar_injection.md#automatic)
-- [Traffic management](https://gitlab.com/fjammes/k8s-school/blob/master/homefs/istio/traffic_management.md)
-    - [Deploy the bookinfo sample application](https://gitlab.com/fjammes/k8s-school/blob/master/homefs/istio/traffic_management.md#task-1-deploy-the-bookinfo-sample-application)
+- [Sidecar injection](./sidecar_injection.md)
+    - [Manual](./sidecar_injection.md#manual)
+    - [Automatic](./sidecar_injection.md#automatic)
+- [Traffic management](./traffic_management.md)
+    - [Deploy the bookinfo sample application](./traffic_management.md#task-1-deploy-the-bookinfo-sample-application)
 
 

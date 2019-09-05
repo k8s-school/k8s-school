@@ -14,6 +14,7 @@ cd istio-"$ISTIO_VERSION"
 
 echo "Init helm"
 kubectl apply -f install/kubernetes/helm/helm-service-account.yaml
+helm init --service-account=tiller
 
 echo "Install the Istio initializer (istio-init) chart to bootstrap all the Istio’s CRDs"
 
