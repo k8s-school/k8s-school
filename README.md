@@ -45,7 +45,7 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
 Use automated procedure below (sudo access required)
 
 ```shell
-git clone https://github.com/fjammes/kind-travis-ci
+git clone https://github.com/k8s-school/kind-travis-ci
 cd kind-travis-ci
 ./kind/k8s-create.sh
 ```
@@ -56,7 +56,7 @@ Then configure the container used during the school (i.e. Kubernetes client and 
 # Get configuration file from kind cluster
 SCHOOL="$HOME/src/k8s-school"
 mkdir -p "$SCHOOL"
-git clone https://gitlab.com/fjammes/k8s-school "$SCHOOL"
+git clone https://github.com/k8s-school/k8s-school "$SCHOOL"
 mkdir -p "$SCHOOL/homefs/.kube"
 export KUBECONFIG=$(kind get kubeconfig-path --name="kind")
 cp "$KUBECONFIG" "$SCHOOL/homefs/.kube/config"
