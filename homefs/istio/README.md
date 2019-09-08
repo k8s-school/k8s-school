@@ -100,4 +100,21 @@ $ helm ls
 - [Traffic management](./traffic_management.md)
     - [Deploy the bookinfo sample application](./traffic_management.md#task-1-deploy-the-bookinfo-sample-application)
 
+# Uninstall
+## Uninstall Istio
 
+Delete both istio and istio-init Helm charts
+```
+helm delete --purge istio
+helm delete --purge istio-init
+```
+
+Delete CRDs and Istio Configuration
+```
+kubectl delete -f install/kubernetes/helm/istio-init/files
+```
+## Uninstall Helm
+Delete Tiller (Helm server) deployment
+```
+kubectl -n kube-system delete deploy tiller-deploy
+```
