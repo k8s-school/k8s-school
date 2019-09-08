@@ -104,7 +104,9 @@ $ helm ls
     - [Metrics with Prometheus](./observability.md#metrics-with-prometheus)
 - [Traffic management](./traffic_management.md)
     - [Deploy the bookinfo sample application](./traffic_management.md#task-1-deploy-the-bookinfo-sample-application)
-
+    - [Routing traffic to one version only](./traffic_management.md#task-2-route-the-traffic-to-one-version-only)
+    - [Traffic Shifting](./traffic_management.md#task-3-traffic-shifting)
+    - [Remove routing rules](./traffic_management.md#task-4-remove-routing-rules-reset)
 # Uninstall
 ## Uninstall Istio
 
