@@ -67,8 +67,7 @@ Open your browser to http://localhost:15032.
 
 **Option 2: Expose Jaeger with a service type NodePort**
 ```
-kubectl expose service tracing --type=NodePort --name=tracing-svc -n istio-sy
-stem
+kubectl expose service jaeger-query --type=NodePort --name=tracing-svc -n istio-system
 ```
 Retrieve Jaeger URL:
 ```
@@ -76,7 +75,7 @@ export NODE_IP=$(kubectl get po -l istio=ingressgateway -n istio-system -o jsonp
 
 export NODE_PORT=$(kubectl get svc tracing-svc -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
 
-echo http://$NODE_IP:$NODE_PORT
+echo http://$NODE_IP:$NODE_PORT/jaeger/search
 ```
 
 Generating traces using the Bookinfo sample
