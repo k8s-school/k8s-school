@@ -1,6 +1,6 @@
 # Istio installation
 
-Helm, the kubernetes package manager, is a prerequisite for Istio installation
+Helm, the kubernetes package manager, is a prerequisite for the choosen Istio installation method.
 
 ## Helm install and setup
 
