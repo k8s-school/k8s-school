@@ -97,6 +97,7 @@ $ helm ls
 - [Sidecar injection](./sidecar_injection.md)
     - [Manual](./sidecar_injection.md#manual)
     - [Automatic](./sidecar_injection.md#automatic)
+- [Observability](./observability.md)
 - [Traffic management](./traffic_management.md)
     - [Deploy the bookinfo sample application](./traffic_management.md#task-1-deploy-the-bookinfo-sample-application)
 
