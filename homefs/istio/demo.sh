@@ -18,19 +18,15 @@ echo "Init helm"
 kubectl apply -f install/kubernetes/helm/helm-service-account.yaml
 helm init --service-account=tiller
 
+echo "Wait until Tiller pod is Ready"
+kubectl -n kube-system wait --timeout=300s --for=condition=Ready $(kubectl -n kube-system get pods -l app=helm -o=name)
+
 echo "Install the Istio initializer (istio-init) chart to bootstrap all the Istio’s CRDs"
 
 helm install install/kubernetes/helm/istio-init --name istio-init --namespace istio-system
 
 echo "Wait until all pods' status are **Completed**"
-
-
-# Wait for all pods to be in running state
-while true
-do
-    sleep 2
-    kubectl get pods -n istio-system  -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.phase}{"\n"}{end}' | egrep -v "Completed" || break
-done
+kubectl -n istio-system wait --for=condition=complete job --all
 
 echo "Verify that all 23 Istio CRDs were committed to the Kubernetes api-server"
 kubectl get crds | grep 'istio.io\|certmanager.k8s.io' | wc -l
@@ -49,11 +45,7 @@ helm install install/kubernetes/helm/istio --name istio --namespace istio-system
 --set prometheus.service.nodePort.enabled=true
 
 echo "Wait until all pods' status are **Completed** or **Running** or **Succeeded**. This step takes a longer time then previous ones."
-while true
-do
-    sleep 2
-    kubectl get pods -n istio-system  -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.phase}{"\n"}{end}' | egrep -v "Running|Completed|Succeeded" || break
-done
+kubectl -n istio-system wait --timeout=300s --for=condition=available deploy --all
 
 
 echo "Ensure all Helm charts (istio-init and istio) are correctly deployed to kubernetes cluster"
