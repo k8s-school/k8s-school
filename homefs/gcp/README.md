@@ -26,5 +26,3 @@ gcloud compute ssh student@node-X
 # Follow Kubernetes install documentation 
 
 https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
-
-NOTE: Docker package is named 'docker-engine' on Debian
