@@ -98,6 +98,10 @@ $ helm ls
     - [Manual](./sidecar_injection.md#manual)
     - [Automatic](./sidecar_injection.md#automatic)
 - [Observability](./observability.md)
+    - [Kiali](./observability.md#kiali)
+    - [Grafana dashboards](./observability.md#grafana-dashboards)
+    - [Tracing with Jaeger](./observability.md#tracing-with-jaeger)
+    - [Metrics with Prometheus](./observability.md#metrics-with-prometheus)
 - [Traffic management](./traffic_management.md)
     - [Deploy the bookinfo sample application](./traffic_management.md#task-1-deploy-the-bookinfo-sample-application)
 
