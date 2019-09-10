@@ -78,10 +78,7 @@ export NODE_PORT=$(kubectl get svc tracing-svc -n istio-system -o 'jsonpath={.sp
 echo http://$NODE_IP:$NODE_PORT/jaeger/search
 ```
 
-Install Bookinfo application
-```
-../install-bookinfo.sh
-```
+Install Bookinfo application: https://istio.io/docs/examples/bookinfo/
 
 Generate traces using the Bookinfo sample
 ```
