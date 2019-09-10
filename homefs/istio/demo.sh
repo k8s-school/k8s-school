@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 set -x
@@ -8,10 +8,12 @@ NS=istio-system
 
 # Helm auto completion:
 source <(helm completion bash)
-echo 'source <(helm completion bash)' >> ~/.bashrc
+# echo 'source <(helm completion bash)' >> ~/.bashrc
 
 echo "Download istio (version $ISTIO_VERSION)"
-curl -L https://git.io/getLatestIstio | ISTIO_VERSION="$ISTIO_VERSION" sh -
+if [ ! -d "istio-$ISTIO_VERSION" ]; then
+    curl -L https://git.io/getLatestIstio | ISTIO_VERSION="$ISTIO_VERSION" sh -
+fi
 cd istio-"$ISTIO_VERSION"
 
 echo "Init helm"
@@ -25,8 +27,8 @@ echo "Install the Istio initializer (istio-init) chart to bootstrap all the Isti
 
 helm install install/kubernetes/helm/istio-init --name istio-init --namespace istio-system
 
-echo "Wait until all pods' status are **Completed**"
-kubectl -n istio-system wait --for=condition=complete job --all
+echo "Wait until all pods status are **Completed**"
+kubectl -n istio-system wait --timeout=300s --for=condition=complete job --all
 
 echo "Verify that all 23 Istio CRDs were committed to the Kubernetes api-server"
 kubectl get crds | grep 'istio.io\|certmanager.k8s.io' | wc -l
