@@ -6,7 +6,7 @@ kubectl -n istio-system get svc kiali
     NAME    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)     AGE
     kiali   ClusterIP   10.107.105.114   <none>        20001/TCP   99m
 
-By default, Kiali is exposed with a service type ClusterIP. Thus, it is not reachable from ouside kubernets cluster.
+By default, Kiali is exposed with a service type ClusterIP. Thus, it is not reachable from ouside Kubernetes cluster.
 We have two options to make it reachable externally.
 
 **Option 1: Using kubectl port forwarding**
