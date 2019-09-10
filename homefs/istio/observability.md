@@ -78,7 +78,12 @@ export NODE_PORT=$(kubectl get svc tracing-svc -n istio-system -o 'jsonpath={.sp
 echo http://$NODE_IP:$NODE_PORT/jaeger/search
 ```
 
-Generating traces using the Bookinfo sample
+Install Bookinfo application
+```
+../install-bookinfo.sh
+```
+
+Generate traces using the Bookinfo sample
 ```
 for i in `seq 1 100`; do curl -s -o /dev/null http://$GATEWAY_URL/productpage; done
 ```
