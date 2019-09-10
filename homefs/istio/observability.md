@@ -6,7 +6,7 @@ kubectl -n istio-system get svc kiali
     NAME    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)     AGE
     kiali   ClusterIP   10.107.105.114   <none>        20001/TCP   99m
 
-By default, Kiali is exposed with a service type ClusterIP. Thus, it is not reachable from ouside kubernets cluster.
+By default, Kiali is exposed with a service type ClusterIP. Thus, it is not reachable from ouside Kubernetes cluster.
 We have two options to make it reachable externally.
 
 **Option 1: Using kubectl port forwarding**
@@ -26,7 +26,7 @@ Kiali users need to be identified using a username and password to login into Ki
 ```
 kubectl create secret generic kiali -n istio-system --from-literal "username=admin" --from-literal "passphrase=admin"
 ```
-Edit Kiala ConfigMap and set Grafana URL **url: http://grafana:3000**
+Edit Kiali ConfigMap and set Grafana URL **url: http://grafana:3000**
 ```
 kubectl -n istio-system edit cm kiali
 ```
@@ -78,7 +78,9 @@ export NODE_PORT=$(kubectl get svc tracing-svc -n istio-system -o 'jsonpath={.sp
 echo http://$NODE_IP:$NODE_PORT/jaeger/search
 ```
 
-Generating traces using the Bookinfo sample
+Install Bookinfo application: https://istio.io/docs/examples/bookinfo/
+
+Generate traces using the Bookinfo sample
 ```
 for i in `seq 1 100`; do curl -s -o /dev/null http://$GATEWAY_URL/productpage; done
 ```
