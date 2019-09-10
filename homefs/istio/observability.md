@@ -26,7 +26,7 @@ Kiali users need to be identified using a username and password to login into Ki
 ```
 kubectl create secret generic kiali -n istio-system --from-literal "username=admin" --from-literal "passphrase=admin"
 ```
-Edit Kiala ConfigMap and set Grafana URL **url: http://grafana:3000**
+Edit Kiali ConfigMap and set Grafana URL **url: http://grafana:3000**
 ```
 kubectl -n istio-system edit cm kiali
 ```
