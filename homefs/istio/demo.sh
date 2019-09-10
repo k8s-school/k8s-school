@@ -3,18 +3,22 @@
 set -e
 set -x
 
-ISTIO_VERSION=1.2.4
-NS=istio-system
+ISTIO_VERSION="1.2.4"
+NS="istio-system"
+
+DIR=$(cd "$(dirname "$0")"; pwd -P)
 
 # Helm auto completion:
 source <(helm completion bash)
 # echo 'source <(helm completion bash)' >> ~/.bashrc
 
+ISTIO_DIR="$DIR/istio-${ISTIO_VERSION}"
+
 echo "Download istio (version $ISTIO_VERSION)"
-if [ ! -d "istio-$ISTIO_VERSION" ]; then
+if [ ! -d "$ISTIO_DIR" ]; then
     curl -L https://git.io/getLatestIstio | ISTIO_VERSION="$ISTIO_VERSION" sh -
 fi
-cd istio-"$ISTIO_VERSION"
+cd "$ISTIO_DIR"
 
 echo "Init helm"
 kubectl apply -f install/kubernetes/helm/helm-service-account.yaml
