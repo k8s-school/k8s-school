@@ -5,6 +5,8 @@
 set -e
 set -x
 
+echo "$WARN: run on docker host, not inside kubectl"
+
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
 NODE="kind-worker"
@@ -19,7 +21,8 @@ kubectl get services --namespace=kube-system
 # Ingress to Traefik web ui
 kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/ui.yaml
 
-NODE_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' kind-worker)
+# WARN need to be ran on host
+NODE_IP=$(kubectl get nodes $NODE -o jsonpath='{ .status.addresses[?(@.type=="InternalIP")].address }')
 echo "${NODE_IP} $INGRESS_DN" | sudo tee -a /etc/hosts
 
 # Return 404
@@ -30,6 +33,7 @@ curl https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/chee
     sed "s/.minikube/.$DN/" | \
     kubectl apply -f -
 
+# WARN run on host
 # Ingress ui is available 
 curl http://"$INGRESS_DN"
 
@@ -38,10 +42,10 @@ curl http://"$INGRESS_DN"
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=$INGRESS_DN"
 kubectl -n kube-system create secret tls traefik-ui-tls-cert --key=tls.key --cert=tls.crt
 
-# WARN: add fix to official doc file
+# use official doc file
 kubectl apply -f "$DIR/manifest/tls-ingress.yaml"
 
-# Patch https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-rbac.yaml
+# Patch https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-ds.yaml
 # add a TLS entrypoint by adding the following args to the container spec:
 # --defaultentrypoints=http,https
 # --entrypoints=Name:https Address::443 TLS
@@ -49,6 +53,8 @@ kubectl apply -f "$DIR/manifest/tls-ingress.yaml"
 #
 # And open hostPort 443
 kubectl apply -f "$DIR/manifest/tls-traefik-ds.yaml"
+kubectl delete po -n kube-system -l k8s-app=traefik-ingress-lb,name=traefik-ingress-lb
+
 
 # Password for traefik web ui
 #
@@ -85,5 +91,5 @@ echo "${NODE_IP} cheeses.$DN" | sudo tee -a /etc/hosts
 
 # Open in browser
 # WARN: do not forget the final slash
-http://cheeses.kind/stilton/
+curl http://cheeses."$DN"/stilton/
 
