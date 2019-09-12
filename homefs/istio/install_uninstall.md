@@ -34,8 +34,8 @@ tiller-deploy-8557598fbc-6d2hl 1/1 Running 0 96s
 
 Download istio (version 1.2.4)
 ```shell
-$ curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.2.4 sh -
-$ cd istio-1.2.4
+$ curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.2.5 sh -
+$ cd istio-1.2.5
 ```
 Install the istio-init chart to bootstrap all the Istio’s CRDs:
 ```shell
