@@ -53,6 +53,9 @@ helm install install/kubernetes/helm/istio --name istio --namespace istio-system
 echo "Wait until all pods' status are **Completed** or **Running** or **Succeeded**. This step takes a longer time then previous ones."
 kubectl -n istio-system wait --timeout=300s --for=condition=available deploy --all
 
+echo 'Create a secret for Kiali whose username is "admin" and passphrase is "admin"'
+kubectl create secret generic kiali -n istio-system --from-literal "username=admin" --from-literal "passphrase=admin"
+
 
 echo "Ensure all Helm charts (istio-init and istio) are correctly deployed to kubernetes cluster"
 helm ls
