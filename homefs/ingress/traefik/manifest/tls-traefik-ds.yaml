@@ -33,7 +33,6 @@ spec:
           hostPort: 443 
         - name: admin
           containerPort: 8080
-          hostPort: 8080
         securityContext:
           capabilities:
             drop:
