@@ -46,8 +46,9 @@ Find out the nodeport on which the istio-ingressgateway is listening and try to 
     $ curl -s http://${GATEWAY_URL}/productpage | grep -o "<title>.*</title>"
     $ curl 172.17.0.3:31380/productpage -I
 
-    while :; do echo ====================================
+    while :;
+    do echo ====================================
     sleep 1
-    curl -s 172.17.0.3:31380/productpage | grep 'font color' | uniq
+    curl -s ${GATEWAY_URL}/productpage | grep 'font color' | uniq
     done
 

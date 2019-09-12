@@ -23,8 +23,4 @@ kubectl --namespace=bookinfo wait --timeout=400s --for=condition=available deplo
 
 # Ingress
 kubectl apply -f "$ISTIO_DIR"/samples/bookinfo/networking/bookinfo-gateway.yaml
-export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].nodePort}')
-export SECURE_INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="https")].nodePort}')
-export INGRESS_HOST=$(kubectl get nodes kind-worker -o jsonpath='{ .status.addresses[?(@.type=="InternalIP")].address }')
-GATEWAY_URL="$INGRESS_HOST:$INGRESS_PORT/productpage"
-echo "$GATEWAY_URL"
+

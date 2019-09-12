@@ -3,7 +3,7 @@
 set -e
 set -x
 
-ISTIO_VERSION="1.2.4"
+ISTIO_VERSION="1.2.5"
 NS="istio-system"
 
 DIR=$(cd "$(dirname "$0")"; pwd -P)
