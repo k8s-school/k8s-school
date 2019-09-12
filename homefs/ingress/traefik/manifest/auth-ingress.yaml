@@ -17,6 +17,4 @@ spec:
           serviceName: traefik-web-ui
           servicePort: 80
   tls:
-  - hosts:
-    - ingress.kind 
-    secretName: traefik-ui-tls-cert
+  - secretName: traefik-ui-tls-cert

@@ -3,7 +3,7 @@
 set -e
 set -x
 
-ISTIO_VERSION=1.2.4
+ISTIO_VERSION=1.2.5
 
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
@@ -26,5 +26,5 @@ kubectl apply -f "$ISTIO_DIR"/samples/bookinfo/networking/bookinfo-gateway.yaml
 export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].nodePort}')
 export SECURE_INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="https")].nodePort}')
 export INGRESS_HOST=$(kubectl get nodes kind-worker -o jsonpath='{ .status.addresses[?(@.type=="InternalIP")].address }')
-GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
+GATEWAY_URL="$INGRESS_HOST:$INGRESS_PORT/productpage"
 echo "$GATEWAY_URL"
