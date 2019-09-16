@@ -7,17 +7,21 @@ export SECURE_INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressga
 export INGRESS_HOST=$(kubectl get nodes kind-worker -o jsonpath='{ .status.addresses[?(@.type=="InternalIP")].address }')
 GATEWAY_URL="http://$INGRESS_HOST:$INGRESS_PORT/productpage"
 
+LOG_FILE="/tmp/query.log"
+rm -r "$LOG_FILE"
+
+echo "Sending logs to $LOG_FILE"
 
 # TODO: test siege or fortio
-curl -s "${GATEWAY_URL}" | grep -o "<title>.*</title>"
-curl  -sIv "${GATEWAY_URL}" 
+curl -s "${GATEWAY_URL}" | grep -o "<title>.*</title>" >> "$LOG_FILE"
+curl  -sIv "${GATEWAY_URL}" >> "$LOG_FILE"
 
 while :;
-do echo "===================================="
+do echo "====================================" >> "$LOG_FILE"
   sleep 1
   for i in $(seq 1 100); 
   do
-    curl -s "$GATEWAY_URL" | grep 'font color' | uniq
+    curl -s "$GATEWAY_URL" | grep 'font color' | uniq >> "$LOG_FILE"
     # curl -s -o /dev/null "$GATEWAY_URL"
   done
 done

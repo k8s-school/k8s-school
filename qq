@@ -1,0 +1,30 @@
+[1mdiff --git a/homefs/istio/bookinfo-query.sh b/homefs/istio/bookinfo-query.sh[m
+[1mindex 55ad6b4..1c97006 100755[m
+[1m--- a/homefs/istio/bookinfo-query.sh[m
+[1m+++ b/homefs/istio/bookinfo-query.sh[m
+[36m@@ -7,17 +7,21 @@[m [mexport SECURE_INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressga[m
+ export INGRESS_HOST=$(kubectl get nodes kind-worker -o jsonpath='{ .status.addresses[?(@.type=="InternalIP")].address }')[m
+ GATEWAY_URL="http://$INGRESS_HOST:$INGRESS_PORT/productpage"[m
+ [m
+[32m+[m[32mLOG_FILE="/tmp/query.log"[m
+[32m+[m[32mrm -r "$LOG_FILE"[m
+[32m+[m
+[32m+[m[32mecho "Sending logs to $LOG_FILE"[m
+ [m
+ # TODO: test siege or fortio[m
+[31m-curl -s "${GATEWAY_URL}" | grep -o "<title>.*</title>"[m
+[31m-curl  -sIv "${GATEWAY_URL}" [m
+[32m+[m[32mcurl -s "${GATEWAY_URL}" | grep -o "<title>.*</title>" >> "$LOG_FILE"[m
+[32m+[m[32mcurl  -sIv "${GATEWAY_URL}" >> "$LOG_FILE"[m
+ [m
+ while :;[m
+[31m-do echo "===================================="[m
+[32m+[m[32mdo echo "====================================" >> "$LOG_FILE"[m
+   sleep 1[m
+   for i in $(seq 1 100); [m
+   do[m
+[31m-    curl -s "$GATEWAY_URL" | grep 'font color' | uniq[m
+[32m+[m[32m    curl -s "$GATEWAY_URL" | grep 'font color' | uniq >> "$LOG_FILE"[m
+     # curl -s -o /dev/null "$GATEWAY_URL"[m
+   done[m
+ done[m
