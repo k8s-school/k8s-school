@@ -40,6 +40,7 @@ curl http://"$INGRESS_DN"
 # TLS support
 #
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=$INGRESS_DN"
+kubectl delete secrets -n kube-system traefik-ui-tls-cert --ignore-not-found=true
 kubectl -n kube-system create secret tls traefik-ui-tls-cert --key=tls.key --cert=tls.crt
 
 # use official doc file
@@ -60,7 +61,8 @@ kubectl delete po -n kube-system -l k8s-app=traefik-ingress-lb,name=traefik-ingr
 #
 sudo apt install apache2-utils
 htpasswd  -bc ./auth user pass
-kubectl create secret generic mysecret --from-file auth --namespace=kube-system
+kubectl delete secret --namespace=kube-system mysecret --ignore-not-found=true
+kubectl create secret generic --namespace=kube-system mysecret --from-file auth 
 # Patch ingress according to doc: https://docs.traefik.io/user-guide/kubernetes/#creating-the-secret
 kubectl apply -f manifest/auth-ingress.yaml
 

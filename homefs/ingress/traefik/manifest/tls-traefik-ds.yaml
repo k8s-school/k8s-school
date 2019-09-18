@@ -22,15 +22,15 @@ spec:
       serviceAccountName: traefik-ingress-controller
       terminationGracePeriodSeconds: 60
       containers:
-      - image: traefik
+      - image: traefik:v1.7
         name: traefik-ingress-lb
         ports:
         - name: http
           containerPort: 80
           hostPort: 80
         - name: https
-          containerPort: 443 
-          hostPort: 443 
+          containerPort: 443
+          hostPort: 443
         - name: admin
           containerPort: 8080
         securityContext:
