@@ -67,6 +67,8 @@ ENV GOPATH /go
 # setup autocomplete in bash, bash-completion package should be installed first.
 RUN kubectl completion bash > /etc/kubectl.completion
 
+RUN wget -O /etc/kubectl_aliases https://raw.githubusercontent.com/ahmetb/kubectl-alias/master/.kubectl_aliases
+
 COPY rootfs /
 
 # Expose kubernetes dashboard
