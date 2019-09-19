@@ -56,7 +56,6 @@ kubectl -n istio-system wait --timeout=300s --for=condition=available deploy --a
 echo 'Create a secret for Kiali whose username is "admin" and passphrase is "admin"'
 kubectl create secret generic kiali -n istio-system --from-literal "username=admin" --from-literal "passphrase=admin"
 
-
 echo "Ensure all Helm charts (istio-init and istio) are correctly deployed to kubernetes cluster"
 helm ls
 #    NAME            REVISION        UPDATED                         STATUS          CHART                   APP VERSION     NAMESPACE
