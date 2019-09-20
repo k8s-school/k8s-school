@@ -16,6 +16,6 @@ complete -F __start_kubectl k
 
 # See https://github.com/ahmetb/kubectl-aliases
 [ -f /etc/kubectl_aliases ] && source /etc/kubectl_aliases
-function kubectl() { echo "+ kubectl $@"; command kubectl $@; }
+# function kubectl() { echo "+ kubectl $@"; command kubectl $@; }
 
 
