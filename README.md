@@ -24,7 +24,7 @@ https://kubernetes.io/docs/setup/pick-right-solution/#bare-metal
 ```shell
 sudo df –sh /var/lib/docker # or /var/snap/docker/common/var-lib-docker/
 ```
-- Internet access without proxy
+- Internet access **without proxy**
 - `sudo` access
 - Install dependencies below:
 ```shell
