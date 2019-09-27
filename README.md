@@ -1,6 +1,6 @@
 # k8s-school
 
-![K8s-school Logo](http://k8s-school.fr/images/logo.svg "K8s-school, expertise et formation Kubernetes")
+![K8s-school Logo](http://k8s-school.fr/images/logo.svg "K8s-school, expertise et formation Kubernetes")(http://github.com)
 
 
 # Course
