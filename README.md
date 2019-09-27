@@ -1,7 +1,5 @@
 # k8s-school
 
-[WWW](https://www.k8s-school.fr)
-
 ![K8s-school Logo](http://k8s-school.fr/images/logo.svg "K8s-school, expertise et formation Kubernetes")
 
 
@@ -9,7 +7,7 @@
 
 All materials are [here](https://drive.google.com/open?id=0B-VJpOQeezDjZktuTnlEMEpGMUU)
 
-Free kubernetes icons: https://github.com/octo-technology/kubernetes-icons
+Free kubernetes icons: https://github.com/kubernetes/community/tree/master/icons
 
 # Solutions for installing kubernetes
 

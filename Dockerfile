@@ -62,10 +62,11 @@ RUN wget https://dl.google.com/go/$GO_PKG && \
 ENV GOROOT /usr/local/go
 ENV GOPATH /go
 
-
 # Install kubectl completion
 # setup autocomplete in bash, bash-completion package should be installed first.
 RUN kubectl completion bash > /etc/kubectl.completion
+
+RUN wget -O /etc/kubectl_aliases https://raw.githubusercontent.com/ahmetb/kubectl-alias/master/.kubectl_aliases
 
 COPY rootfs /
 
