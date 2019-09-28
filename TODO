@@ -1,3 +1,3 @@
-- Rename k8sschool/kubectl Docker Image/Container. Suggestions: kube-box, ktools, k8s-school
+- Rename k8sschool/kubectl Docker Image/Container. Suggestions: k8s-box, k8s-tools
 - Tag kubectl Docker Image
 - Add diagrams to illustrate Book samples
