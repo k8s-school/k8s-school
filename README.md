@@ -3,7 +3,7 @@
 
 # Course
 
-All materials are [here](https://drive.google.com/open?id=0B-VJpOQeezDjZktuTnlEMEpGMUU)
+All materials are [here](https://k8s-school.fr/pdf)
 
 Free kubernetes icons: https://github.com/kubernetes/community/tree/master/icons
 
@@ -11,7 +11,7 @@ Free kubernetes icons: https://github.com/kubernetes/community/tree/master/icons
 
 https://kubernetes.io/docs/setup/pick-right-solution/#bare-metal
 
-# Exercices
+# Setup course platform
 
 ## Pre-requisites
 
