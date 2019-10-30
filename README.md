@@ -1,17 +1,13 @@
 [![K8s-school Logo](http://k8s-school.fr/images/logo.svg "K8s-school, expertise et formation Kubernetes")](https://k8s-school.fr)
 
 
-# Course
+# Kubernetes fundamentals course
 
-All materials are [here](https://k8s-school.fr/pdf)
+## Slides and materials
 
-Free kubernetes icons: https://github.com/kubernetes/community/tree/master/icons
+All slides are [on our website](https://k8s-school.fr/pdf)
 
-# Solutions for installing kubernetes
-
-https://kubernetes.io/docs/setup/pick-right-solution/#bare-metal
-
-# Setup course platform
+# Set up course platform
 
 ## Pre-requisites
 
@@ -77,3 +73,14 @@ https://github.com/kubernetes/examples/blob/master/README.md
 ## Install Prometheus
 
 See [here](https://gitlab.com/fjammes/k8s-advanced/tree/master/B_prometheus)
+
+# Additional information
+
+## Free kubernetes icons
+
+* https://github.com/kubernetes/community/tree/master/icons
+* https://www.k8s-school.fr/resources/blog/3-k8s-official-icons/
+
+## Solutions for installing kubernetes
+
+https://kubernetes.io/docs/setup/pick-right-solution/#bare-metal
