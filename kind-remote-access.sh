@@ -9,7 +9,10 @@ DIR=$(cd "$(dirname "$0")"; pwd -P)
 
 KIND_SERVER="clrqserv01.in2p3.fr"
 
-scp -r "$KIND_SERVER":~/.kube/kind-config-kind ~/src/k8s-school/homefs/.kube/config
+KUBECONFIG="$HOME/src/k8s-school/homefs/.kube/config"
+
+scp -r "$KIND_SERVER":~/.kube/kind-config-kind "$KUBECONFIG"
+PORT=$(grep server "$KUBECONFIG" | cut -d':' -f 4)
 # Optional: retrieve certs
 # scp -r "$KIND_SERVER":~/src/k8s-school/homefs/.certs ~/src/k8s-school/homefs/
-ssh -nNT -L 35777:localhost:35777 clrqserv01.in2p3.fr
+ssh -nNT -L "$PORT":localhost:"$PORT" clrqserv01.in2p3.fr

@@ -3,7 +3,7 @@
 
 # Course
 
-All materials are [here](https://drive.google.com/open?id=0B-VJpOQeezDjZktuTnlEMEpGMUU)
+All materials are [here](https://k8s-school.fr/pdf)
 
 Free kubernetes icons: https://github.com/kubernetes/community/tree/master/icons
 
@@ -11,7 +11,7 @@ Free kubernetes icons: https://github.com/kubernetes/community/tree/master/icons
 
 https://kubernetes.io/docs/setup/pick-right-solution/#bare-metal
 
-# Exercices
+# Setup course platform
 
 ## Pre-requisites
 
@@ -29,7 +29,7 @@ sudo df –sh /var/lib/docker # or /var/snap/docker/common/var-lib-docker/
 sudo apt-get install curl docker.io git vim
 
 # then add current user to docker group and restart gnome session
-sudo vim /etc/group
+sudo usermod -a -G docker <USER>
 ```
 However, depending on your linux distribution version, you might have to upgrade to docker-ce:
 https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
