@@ -54,6 +54,7 @@ if [ "$DEV" = true ]; then
 fi
 MOUNTS="$MOUNTS --volume "$DIR"/homefs:$HOME"
 MOUNTS="$MOUNTS --volume /etc/group:/etc/group:ro -v /etc/passwd:/etc/passwd:ro"
+MOUNTS="$MOUNTS --volume /usr/local/share/ca-certificates:/usr/local/share/ca-certificates"
 
 docker pull "$IMAGE"
 echo "oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOo"
