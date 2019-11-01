@@ -8,7 +8,7 @@ export INGRESS_HOST=$(kubectl get nodes kind-worker -o jsonpath='{ .status.addre
 GATEWAY_URL="http://$INGRESS_HOST:$INGRESS_PORT/productpage"
 
 LOG_FILE="/tmp/query.log"
-rm -r "$LOG_FILE"
+rm -rf "$LOG_FILE"
 
 echo "Sending logs to $LOG_FILE"
 
