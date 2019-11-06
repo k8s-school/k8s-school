@@ -7,6 +7,8 @@
 
 All slides are [on our website](https://k8s-school.fr/pdf)
 
+Check the [Framapad](https://annuel.framapad.org/p/k8s-school?lang=en)
+
 # Set up course platform
 
 ## Pre-requisites
