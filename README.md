@@ -57,7 +57,7 @@ cp "$KUBECONFIG" "$SCHOOL/homefs/.kube/config"
 
 # Run kubectl client inside container and play with k8s
 cd "$SCHOOL"
-./run-kubectl.sh
+./k8s-toolbox.sh
 kubectl get nodes
 ```
 

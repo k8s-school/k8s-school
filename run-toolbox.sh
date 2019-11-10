@@ -47,7 +47,7 @@ fi
 # Launch container
 #
 # Use host network to easily publish k8s dashboard
-IMAGE=k8sschool/kubectl
+IMAGE=k8sschool/k8s-toolbox
 if [ "$DEV" = true ]; then
     echo "Running in development mode"
     MOUNTS="$MOUNTS -v $DIR/rootfs/opt:/opt"
@@ -57,9 +57,9 @@ MOUNTS="$MOUNTS --volume /etc/group:/etc/group:ro -v /etc/passwd:/etc/passwd:ro"
 MOUNTS="$MOUNTS --volume /usr/local/share/ca-certificates:/usr/local/share/ca-certificates"
 
 docker pull "$IMAGE"
-echo "oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOo"
-echo "   Welcome in kubectl container"
-echo "oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOo"
+echo "oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO"
+echo "   Welcome in k8s toolbox container"
+echo "oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO"
 docker run $BASH_OPTS --net=host \
     $MOUNTS --rm \
     --user=$(id -u):$(id -g $USER) \
