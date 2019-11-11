@@ -55,9 +55,10 @@ mkdir -p "$SCHOOL/homefs/.kube"
 export KUBECONFIG=$(kind get kubeconfig-path --name="kind")
 cp "$KUBECONFIG" "$SCHOOL/homefs/.kube/config"
 
-# Run kubectl client inside container and play with k8s
+# Run k8s toolbox container and play with k8s
 cd "$SCHOOL"
-./k8s-toolbox.sh
+curl -lO https://raw.githubusercontent.com/k8s-school/k8s-toolbox/master/toolbox.sh
+./toolbox.sh
 kubectl get nodes
 ```
 

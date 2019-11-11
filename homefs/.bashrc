@@ -1,6 +1,6 @@
 . /etc/bash_completion
 
-PS1="\u@[kubectl]:\w # "
+PS1="\u@[k8s-toolbox]:\w # "
 
 
 alias ssh="gcloud compute ssh"
