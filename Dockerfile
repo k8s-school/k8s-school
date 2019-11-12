@@ -29,15 +29,24 @@ RUN wget -O /tmp/helm.tgz \
     https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
     cd /tmp && \
     tar zxvf /tmp/helm.tgz && \
+    rm /tmp/helm.tgz && \
     chmod +x /tmp/linux-amd64/helm && \
-    mv /tmp/linux-amd64/helm /usr/local/bin/helm-${HELM_VERSION} && \
-    ln -s /usr/local/bin/helm-${HELM_VERSION} /usr/local/bin/helm
+    mv /tmp/linux-amd64/helm /usr/local/bin/helm
 
 # Install kubectl
 ENV KUBECTL_VERSION 1.15.3
 RUN wget -O /usr/local/bin/kubectl \
     https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl && \
     chmod +x /usr/local/bin/kubectl
+
+# Install kustomize
+ENV KUSTOMIZE_VERSION v3.3.0
+RUN wget -O /tmp/kustomize.tgz \
+    https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz && \
+    tar zxvf /tmp/kustomize.tgz && \
+    rm /tmp/kustomize.tgz && \
+    chmod +x kustomize && \
+    mv kustomize /usr/local/bin/kustomize
 
 # Install kubeval
 ENV KUBEVAL_VERSION 0.9.0
