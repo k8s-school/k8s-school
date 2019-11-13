@@ -1,4 +1,4 @@
-[![K8s-school Logo](http://k8s-school.fr/images/logo.svg "K8s-school, expertise et formation Kubernetes")](https://k8s-school.fr)
+[![K8s-school Logo](http://k8s-school.fr/images/logo.svg "K8s-school, expertise et formation Kubernetes" =250x)](https://k8s-school.fr)
 
 
 # Kubernetes fundamentals course
