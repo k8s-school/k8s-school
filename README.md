@@ -57,6 +57,7 @@ cp "$KUBECONFIG" "$SCHOOL/homefs/.kube/config"
 # Run k8s toolbox container and play with k8s
 cd "$SCHOOL"
 curl -lO https://raw.githubusercontent.com/k8s-school/k8s-toolbox/master/toolbox.sh
+chmod +x toolbox.sh
 ./toolbox.sh
 kubectl get nodes
 ```
