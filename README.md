@@ -66,7 +66,7 @@ kubectl get nodes
 
 ```shell
 # Retrieve examples by running below script from inside [kubectl] container
-./clone-book-examples.sh
+clone-school.sh
 # Play with kubectl and yaml files :-)
 ```
 
