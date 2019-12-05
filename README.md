@@ -51,8 +51,7 @@ SCHOOL="$HOME/src/k8s-school"
 mkdir -p "$SCHOOL"
 git clone https://github.com/k8s-school/k8s-school "$SCHOOL"
 mkdir -p "$SCHOOL/homefs/.kube"
-export KUBECONFIG=$(kind get kubeconfig-path --name="kind")
-cp "$KUBECONFIG" "$SCHOOL/homefs/.kube/config"
+cp "$HOME/.kube/config" "$SCHOOL/homefs/.kube/config" 
 
 # Run k8s toolbox container and play with k8s
 cd "$SCHOOL"
