@@ -1,16 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
-set -e
-set -x
+# Uninstall Istio
+# Check https://istio.io/docs/setup/getting-started/#uninstall
 
-ISTIO_VERSION=1.2.4
+set -euxo pipefail
 
-echo "Delete both istio and istio-init Helm charts"
-helm delete --purge istio
-helm delete --purge istio-init
+DIR=$(cd "$(dirname "$0")"; pwd -P)
+. "$DIR"/env.sh
 
-echo "Delete CRDs and Istio Configuration"
-kubectl delete -f istio-"$ISTIO_VERSION"/install/kubernetes/helm/istio-init/files
-
-echo "Delete Tiller (Helm server) deployment"
-kubectl -n kube-system delete deploy tiller-deploy
+istioctl manifest generate --set profile=demo | kubectl delete -f -
