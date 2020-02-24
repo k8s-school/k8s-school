@@ -34,7 +34,6 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
 
 ### Install kind cluster
 
-
 Use automated procedure below (sudo access required)
 
 ```shell
@@ -46,13 +45,6 @@ or follow official instructions at: https://github.com/kubernetes-sigs/kind
 
 Then configure the container used during the school (i.e. Kubernetes client and tooling):
 ```shell
-# Get configuration file from kind cluster
-SCHOOL="$HOME/src/k8s-school"
-mkdir -p "$SCHOOL"
-git clone https://github.com/k8s-school/k8s-school "$SCHOOL"
-mkdir -p "$SCHOOL/homefs/.kube"
-cp "$HOME/.kube/config" "$SCHOOL/homefs/.kube/config" 
-
 # Run k8s toolbox container and play with k8s
 cd "$SCHOOL"
 curl -lO https://raw.githubusercontent.com/k8s-school/k8s-toolbox/master/toolbox.sh
