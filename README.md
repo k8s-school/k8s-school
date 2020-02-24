@@ -46,7 +46,7 @@ or follow official instructions at: https://github.com/kubernetes-sigs/kind
 Then configure the container used during the school (i.e. Kubernetes client and tooling):
 ```shell
 # Run k8s toolbox container and play with k8s
-cd "$SCHOOL"
+mkdir $HOME/src/ && cd $HOME/src
 curl -lO https://raw.githubusercontent.com/k8s-school/k8s-toolbox/master/toolbox.sh
 chmod +x toolbox.sh
 ./toolbox.sh
