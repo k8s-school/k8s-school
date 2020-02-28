@@ -49,9 +49,8 @@ Follow official instructions at: https://github.com/k8s-school/k8s-toolbox#insta
 
 ## Play with examples
 
-Retrieve examples by running script below inside `toolbox` container:
+Retrieve k8s-school's examples, demos and exercices by running script below inside `toolbox` container:
 ```shell
-# 
 clone-school.sh
 # Play with kubectl and yaml files :-)
 ```
