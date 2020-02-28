@@ -43,7 +43,7 @@ cd kind-travis-ci
 ```
 or follow official instructions at: https://github.com/kubernetes-sigs/kind
 
-### Configure the container used during the school (i.e. Kubernetes client and tooling):
+### Configure the k8s-school toolbox (i.e. Kubernetes client and tooling):
 
 Follow official instructions at: https://github.com/k8s-school/k8s-toolbox#installation
 
