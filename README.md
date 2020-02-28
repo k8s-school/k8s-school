@@ -55,13 +55,6 @@ clone-school.sh
 # Play with kubectl and yaml files :-)
 ```
 
-## Install 2 example apps
-https://github.com/kubernetes/examples/blob/master/README.md
-
-## Install Prometheus
-
-See [here](https://gitlab.com/fjammes/k8s-advanced/tree/master/B_prometheus)
-
 # Additional information
 
 ## Free kubernetes icons
