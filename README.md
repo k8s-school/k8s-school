@@ -46,7 +46,7 @@ or follow official instructions at: https://github.com/kubernetes-sigs/kind
 Then configure the container used during the school (i.e. Kubernetes client and tooling):
 ```shell
 # Run k8s toolbox container and play with k8s
-mkdir $HOME/k8s-school/homefs && cd $HOME/k8s-school
+mkdir $HOME/k8s && cd $HOME/k8s
 curl -lO https://raw.githubusercontent.com/k8s-school/k8s-toolbox/master/toolbox.sh
 chmod +x toolbox.sh
 ./toolbox.sh
@@ -75,6 +75,6 @@ See [here](https://gitlab.com/fjammes/k8s-advanced/tree/master/B_prometheus)
 * https://github.com/kubernetes/community/tree/master/icons
 * https://www.k8s-school.fr/resources/blog/3-k8s-official-icons/
 
-## Solutions for installing kubernetes
+## Creating a single control-plane cluster with kubeadm
 
-https://kubernetes.io/docs/setup/pick-right-solution/#bare-metal
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
