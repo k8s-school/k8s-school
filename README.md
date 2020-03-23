@@ -43,30 +43,17 @@ cd kind-travis-ci
 ```
 or follow official instructions at: https://github.com/kubernetes-sigs/kind
 
-Then configure the container used during the school (i.e. Kubernetes client and tooling):
-```shell
-# Run k8s toolbox container and play with k8s
-mkdir $HOME/k8s && cd $HOME/k8s
-curl -lO https://raw.githubusercontent.com/k8s-school/k8s-toolbox/master/toolbox.sh
-chmod +x toolbox.sh
-./toolbox.sh
-kubectl get nodes
-```
+### Configure the k8s-school toolbox (i.e. Kubernetes client and tooling):
+
+Follow official instructions at: https://github.com/k8s-school/k8s-toolbox#installation
 
 ## Play with examples
 
+Retrieve k8s-school's examples, demos and exercices by running script below inside `toolbox` container:
 ```shell
-# Retrieve examples by running below script from inside [kubectl] container
 clone-school.sh
 # Play with kubectl and yaml files :-)
 ```
-
-## Install 2 example apps
-https://github.com/kubernetes/examples/blob/master/README.md
-
-## Install Prometheus
-
-See [here](https://gitlab.com/fjammes/k8s-advanced/tree/master/B_prometheus)
 
 # Additional information
 
