@@ -45,7 +45,7 @@ or follow official instructions at: https://github.com/kubernetes-sigs/kind
 
 Then validate Kubernetes is up and running
 ```shell
-kubectl get pods
+kubectl get nodes
 ```
 
 ### Configure the k8s-school toolbox (i.e. Kubernetes client and tooling):
