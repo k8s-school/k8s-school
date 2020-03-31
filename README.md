@@ -43,6 +43,11 @@ cd kind-travis-ci
 ```
 or follow official instructions at: https://github.com/kubernetes-sigs/kind
 
+Then validate Kubernetes is up and running
+```shell
+kubectl get pods
+```
+
 ### Configure the k8s-school toolbox (i.e. Kubernetes client and tooling):
 
 Follow official instructions at: https://github.com/k8s-school/k8s-toolbox#installation
