@@ -45,11 +45,18 @@ or follow official instructions at: https://github.com/kubernetes-sigs/kind
 
 Then validate Kubernetes is up and running
 ```shell
+# Check k8s cluster is up and running
 kubectl get nodes
+
 # Launch an ubuntu pod from Docker Hub
 kubectl run -it --rm  shell --image=ubuntu --restart=Never -- date
+
 # Launch an other pod from gcr.io
-kubectl run -it --rm  shell --image=gco.io/kuard --restart=Never -- date
+kubectl run shell --image=gcr.io/kuar-demo/kuard-amd64:1 --restart=Never
+# Open a shell inside it and exit
+kubectl exec -it shell -- ash
+exit
+kubectl delete pod shell
 ```
 
 ### Configure the k8s-school toolbox (i.e. Kubernetes client and tooling):
