@@ -46,6 +46,10 @@ or follow official instructions at: https://github.com/kubernetes-sigs/kind
 Then validate Kubernetes is up and running
 ```shell
 kubectl get nodes
+# Launch an ubuntu pod from Docker Hub
+kubectl run -it --rm  shell --image=ubuntu --restart=Never -- date
+# Launch an other pod from gcr.io
+kubectl run -it --rm  shell --image=gco.io/kuard --restart=Never -- date
 ```
 
 ### Configure the k8s-school toolbox (i.e. Kubernetes client and tooling):
