@@ -27,8 +27,8 @@ sudo apt-get install curl docker.io git vim
 
 # then add current user to docker group 
 sudo usermod -a -G docker $USER
-# command beloaw, or restart gnome session
-newgrp
+# command below, or restart gnome session
+newgrp docker
 ```
 However, depending on your linux distribution version, you might have to upgrade to docker-ce:
 https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
