@@ -25,8 +25,10 @@ sudo df –sh /var/lib/docker # or /var/snap/docker/common/var-lib-docker/
 ```shell
 sudo apt-get install curl docker.io git vim
 
-# then add current user to docker group and restart gnome session
+# then add current user to docker group 
 sudo usermod -a -G docker $USER
+# command below, or restart gnome session
+newgrp docker
 ```
 However, depending on your linux distribution version, you might have to upgrade to docker-ce:
 https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
@@ -45,7 +47,18 @@ or follow official instructions at: https://github.com/kubernetes-sigs/kind
 
 Then validate Kubernetes is up and running
 ```shell
+# Check k8s cluster is up and running
 kubectl get nodes
+
+# Launch an ubuntu pod from Docker Hub
+kubectl run -it --rm  shell --image=ubuntu --restart=Never -- date
+
+# Launch an other pod from gcr.io
+kubectl run shell --image=gcr.io/kuar-demo/kuard-amd64:1 --restart=Never
+# Open a shell inside it and exit
+kubectl exec -it shell -- ash
+exit
+kubectl delete pod shell
 ```
 
 ### Configure the k8s-school toolbox (i.e. Kubernetes client and tooling):
