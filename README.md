@@ -41,7 +41,7 @@ Use automated procedure below (sudo access required)
 ```shell
 git clone https://github.com/k8s-school/kind-travis-ci
 cd kind-travis-ci
-./k8s-create.sh
+./k8s-create.sh -n <cluster-name>
 ```
 or follow official instructions at: https://github.com/kubernetes-sigs/kind
 
