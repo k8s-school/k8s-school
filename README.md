@@ -39,8 +39,8 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
 Use automated procedure below (sudo access required)
 
 ```shell
-git clone https://github.com/k8s-school/kind-travis-ci
-cd kind-travis-ci
+git clone https://github.com/k8s-school/kind-helper
+cd kind-helper
 ./kind/k8s-create.sh
 ```
 or follow official instructions at: https://github.com/kubernetes-sigs/kind
