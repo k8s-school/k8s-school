@@ -7,10 +7,11 @@
 
 # Use ubuntu as base image, it will be downloaded automatically
 FROM ubuntu:latest
-MAINTAINER Jacques Celere "jacques.celere@gmail.com"
+
+LABEL org.opencontainers.image.authors="jacques.celere@gmail.com"
 
 # Update and install python-3
-RUN xxxx 
+RUN xxxx
 
 # Create /home/www
 RUN xxxx
@@ -23,11 +24,11 @@ WORKDIR xxxx
 ADD xxxx
 
 # Copy hello.py inside container, in /home/src
-# NOTE: putting this command to the last line 
+# NOTE: putting this command to the last line
 # would allow to rebuild only this layer if if hello.py is changed
 ADD xxxx
 
-# Launch /home/src/hello.py at container startup 
+# Launch /home/src/hello.py at container startup
 # It will serve files located where it has been launch
-CMD xxxx 
+CMD xxxx
 
