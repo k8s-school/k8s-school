@@ -25,7 +25,7 @@ sudo df –sh /var/lib/docker # or /var/snap/docker/common/var-lib-docker/
 ```shell
 sudo apt-get install curl docker.io git vim
 
-# then add current user to docker group 
+# then add current user to docker group
 sudo usermod -a -G docker $USER
 # command below, or restart gnome session
 newgrp docker
@@ -75,6 +75,12 @@ clone-school.sh
 
 # Additional information
 
+## Kubernetes ecosystem
+
+* [ArgoCD demo](https://github.com/k8s-school/argocd-demo.git)
+* [Ingress demo](https://github.com/k8s-school/nginx-controller-example.git)
+* [Istio demo](ttps://github.com/k8s-school/istio-example.git)
+
 ## Free kubernetes icons
 
 * https://github.com/kubernetes/community/tree/master/icons
@@ -83,3 +89,4 @@ clone-school.sh
 ## Creating a single control-plane cluster with kubeadm
 
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+
