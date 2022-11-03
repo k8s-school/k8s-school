@@ -33,4 +33,13 @@ kubectl wait --timeout=60s -n "$NS" --for=condition=Ready pods nginx
 kubectl exec -n "$NS" -it nginx -- \
     sh -c "apt-get update && apt-get install -y dnsutils inetutils-ping netcat net-tools procps tcpdump"
 
+kubectl wait --timeout=120s -n "$NS" --for=condition=Ready pods -l app.kubernetes.io/instance=pgsql,tier=database
+
 kubectl exec -n "$NS" nginx -- netcat -q 2 -zv pgsql-postgresql 5432
+
+# Interactive mode
+export POSTGRES_PASSWORD=$(kubectl get secret --namespace helm-0 pgsql-postgresql -o jsonpath="{.data.postgres-password}" | \
+    base64 -d)
+kubectl run pgsql-postgresql-client --rm --tty -i --restart='Never' --namespace helm-0 \
+    --image docker.io/bitnami/postgresql:14.5.0-debian-11-r14 --env="PGPASSWORD=$POSTGRES_PASSWORD" \
+    --command -- psql --host pgsql-postgresql -U postgres -d postgres -p 5432 -c '\copyright'
