@@ -28,10 +28,7 @@ helm repo update
 
 helm install --version 11.9.1 --namespace "$NS" pgsql bitnami/postgresql --set primary.podLabels.tier="database",persistence.enabled="false"
 
-# Install netcat, ping, netstat and ps in these pods
-kubectl exec -n "$NS" -it external -- \
-    sh -c "apt-get update && apt-get install -y dnsutils inetutils-ping netcat net-tools procps tcpdump"
-
+kubectl run -n "$NS" nginx --image=nginx -l "tier=webserver"
 kubectl wait --timeout=60s -n "$NS" --for=condition=Ready pods nginx
 kubectl exec -n "$NS" -it nginx -- \
     sh -c "apt-get update && apt-get install -y dnsutils inetutils-ping netcat net-tools procps tcpdump"

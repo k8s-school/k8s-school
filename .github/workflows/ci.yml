@@ -8,7 +8,7 @@ on:
       - master
 jobs:
   main:
-    name: Run k8s advanced exercices
+    name: Run k8s exercices
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
