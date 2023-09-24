@@ -37,7 +37,13 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
 
 Follow official instructions at: https://github.com/k8s-school/k8s-toolbox
 
-Use the k8s-toolbox to create a k8s cluster and launch interactive k8s-toolbox, 
+- Use the k8s-toolbox to create a k8s cluster, if it does not yet exists
+- Launch interactive k8s-toolbox:
+
+```shell
+k8s-toolbox desk
+```
+
 then validate Kubernetes is up and running
 ```shell
 # Check k8s cluster is up and running
@@ -69,13 +75,10 @@ clone-school.sh
 * [ArgoCD demo](https://github.com/k8s-school/argocd-demo.git)
 * [Ingress demo](https://github.com/k8s-school/nginx-controller-example.git)
 * [Istio demo](ttps://github.com/k8s-school/istio-example.git)
+* [Telepresence demo](https://github.com/k8s-school/telepresence-demo.git)
 
 ## Free kubernetes icons
 
 * https://github.com/kubernetes/community/tree/master/icons
 * https://www.k8s-school.fr/resources/blog/3-k8s-official-icons/
-
-## Creating a single control-plane cluster with kubeadm
-
-https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
 
