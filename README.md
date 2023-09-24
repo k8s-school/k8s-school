@@ -33,19 +33,12 @@ newgrp docker
 However, depending on your linux distribution version, you might have to upgrade to docker-ce:
 https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
 
+### Configure the k8s-toolbox (i.e. Kubernetes client and tooling):
 
-### Install kind cluster
+Follow official instructions at: https://github.com/k8s-school/k8s-toolbox
 
-Use automated procedure below (sudo access required)
-
-```shell
-git clone https://github.com/k8s-school/kind-helper
-cd kind-helper
-./k8s-create.sh -n <cluster-name>
-```
-or follow official instructions at: https://github.com/kubernetes-sigs/kind
-
-Then validate Kubernetes is up and running
+Use the k8s-toolbox to create a k8s cluster and launch interactive k8s-toolbox, 
+then validate Kubernetes is up and running
 ```shell
 # Check k8s cluster is up and running
 kubectl get nodes
@@ -60,10 +53,6 @@ kubectl exec -it shell -- ash
 exit
 kubectl delete pod shell
 ```
-
-### Configure the k8s-school toolbox (i.e. Kubernetes client and tooling):
-
-Follow official instructions at: https://github.com/k8s-school/k8s-toolbox#installation
 
 ## Play with examples
 
