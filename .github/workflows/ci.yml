@@ -16,12 +16,15 @@ jobs:
       - name: Stop apparmor
         run: |
           sudo /etc/init.d/apparmor stop
+      - uses: actions/setup-go@v4
+        with:
+          go-version: '1.21.4'
       - name: Create k8s/kind cluster
         run: |
-          git clone --depth 1 -b "k8s-1.25.0" --single-branch https://github.com/k8s-school/kind-helper.git
-          ./kind-helper/k8s-create.sh -c calico
+          go install github.com/k8s-school/ktbx@v1.1.2-rc2
+          ktbx -s
           kubectl get nodes
           kubectl get pods -n kube-system
       - name: Run test on helm
         run: |
-          ./helm/ci.sh
+          ./labs/helm/ci.sh
