@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpaca-prod
+spec:
+  selector:
+    matchLabels:
+      ver: "1"
+      app: "alpaca"
+      env: "prod"
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        ver: "1"
+        app: "alpaca"
+        env: "prod"
+    spec:
+      containers:
+      - name: kuard
+        image: gcr.io/kuar-demo/kuard-amd64:blue

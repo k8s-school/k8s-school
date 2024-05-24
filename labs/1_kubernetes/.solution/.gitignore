@@ -1,0 +1,4 @@
+/primer-dataset.json
+*.yaml
+!17-1-parse.yaml
+!15-14-mongo-pvc.yaml

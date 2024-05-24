@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    component: kube-apiserver
+    tier: control-plane
+  name: kube-apiserver
+spec:
+  containers:
+  - command:
+    - sleep
+    - infinity
+    image: k8sschool/debugtools:1.0.0 
+    imagePullPolicy: IfNotPresent
+    name: kube-apiserver
+    volumeMounts:
+    - mountPath: /etc/kubernetes/simple-policy.yaml
+      name: audit
+      readOnly: true
+    - mountPath: /var/log/audit.log
+      name: audit-log
+      readOnly: false
+  volumes:
+  - hostPath:                                      
+      path: /etc/kubernetes/simple-policy.yaml
+      type: File
+    name: audit
+  - hostPath:
+      path: /var/log/audit.log
+      type: FileOrCreate
+    name: audit-log

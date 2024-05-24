@@ -1,0 +1,27 @@
+# See https://stackoverflow.com/questions/67146527/create-deployments-with-kubectl-version-1-18
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpaca-test
+spec:
+  selector:
+    matchLabels:
+      ver: "2"
+      app: "alpaca"
+      env: "test"
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        ver: "2"
+        app: "alpaca"
+        env: "test"
+    spec:
+      containers:
+      - name: kuard
+        image: gcr.io/kuar-demo/kuard-amd64:blue

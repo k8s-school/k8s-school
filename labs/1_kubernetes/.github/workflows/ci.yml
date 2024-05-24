@@ -1,0 +1,36 @@
+# Qserv operator CI workflow
+---
+name: "CI"
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+jobs:
+  e2e:
+    name: Run e2e tests
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: apparmor
+        run: |
+          set -x
+          sudo apt-get remove mysql-server --purge
+          sudo apt-get install apparmor-profiles
+          sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
+      - name: Create k8s/kind cluster
+        run: |
+          git clone --depth 1 -b "k8s-v1.20.2" --single-branch https://github.com/k8s-school/kind-helper.git
+          ./kind-helper/k8s-create.sh -s
+      - run: |
+          kubectl get nodes
+      - name: Install kustomize
+        run: |
+          VERSION="4.0.5"
+          curl -lO "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"
+          chmod +x ./install_kustomize.sh
+          sudo rm -f /usr/local/bin/kustomize
+          sudo ./install_kustomize.sh "$VERSION" /usr/local/bin
+      - name: Run tests
+        run: ./.solution/ci.sh
