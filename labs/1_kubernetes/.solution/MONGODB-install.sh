@@ -5,8 +5,8 @@ set -euxo pipefail
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
 kubectl apply -f $DIR/../15-12-mongo-configmap.yaml
-kubectl apply -f $DIR/../15-11-mongo-service.yaml 
-kubectl apply -f $DIR/15-14-mongo-pvc.yaml 
+kubectl apply -f $DIR/../15-11-mongo-service.yaml
+kubectl apply -f $DIR/15-14-mongo-pvc.yaml
 
 NB_REPLICA=3
 
@@ -16,4 +16,8 @@ do
 done
 
 kubectl get pods -l app=mongo
-sleep 5
+sleep 25
+
+echo "Checking the status of the mongo replica set"
+# TODO parse JSON output
+kubectl exec -it mongo-0 -- /usr/bin/mongo  --eval 'printjson(rs.status())'

@@ -23,7 +23,6 @@ spec:
         ports:
         - containerPort: 27017
           name: web
-      # This container initializes the mongodb, then sleeps.
       - name: init-mongo
         image: mongo:3.4.1
         command:

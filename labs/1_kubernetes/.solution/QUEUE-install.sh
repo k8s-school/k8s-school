@@ -1,8 +1,11 @@
-set -e
-set -x
+#!/bin/bash
 
-kubectl apply -f 12-4-rs-queue.yaml
-kubectl apply -f 12-5-service-queue.yaml
+set -euxo pipefail
+
+DIR=$(cd "$(dirname "$0")"; pwd -P)
+
+kubectl apply -f $DIR/../12-4-rs-queue.yaml
+kubectl apply -f $DIR/../12-5-service-queue.yaml
 
 kubectl  wait --for=condition=Ready pods -l app=work-queue,component=queue --all
 
