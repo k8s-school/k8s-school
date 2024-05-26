@@ -22,9 +22,9 @@ jobs:
       - name: Create k8s/kind cluster
         run: |
           go install github.com/k8s-school/ktbx@v1.1.2-rc2
-          ktbx -s
+          ktbx create -s
           kubectl get nodes
           kubectl get pods -n kube-system
-      - name: Run test on helm
+      - name: Run labs 
         run: |
           ./labs/1_kubernetes/.solution/ci.sh
