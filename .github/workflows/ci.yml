@@ -27,4 +27,5 @@ jobs:
           kubectl get pods -n kube-system
       - name: Run labs 
         run: |
-          ./labs/1_kubernetes/.solution/ci.sh
+          cd ./labs/1_kubernetes/.solution
+          ./ci.sh
