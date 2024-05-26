@@ -27,4 +27,4 @@ jobs:
           kubectl get pods -n kube-system
       - name: Run test on helm
         run: |
-          ./labs/helm/ci.sh
+          ./labs/1_kubernetes/.solution/ci.sh
