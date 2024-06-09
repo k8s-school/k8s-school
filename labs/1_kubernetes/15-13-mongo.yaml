@@ -15,9 +15,11 @@ spec:
     spec:
       containers:
       - name: mongodb
-        image: mongo:3.4.1
+        image: mongo:4.2
         command:
         - mongod
+        - --bind_ip_all
+        - --noauth
         - --replSet
         - rs0
         ports:
@@ -25,7 +27,7 @@ spec:
           name: web
       # This container initializes the mongodb, then sleeps.
       - name: init-mongo
-        image: mongo:3.4.1
+        image: mongo:4.2
         command:
         - bash
         - /config/init.sh

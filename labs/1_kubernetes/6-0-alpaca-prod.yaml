@@ -24,3 +24,10 @@ spec:
       containers:
       - name: kuard
         image: gcr.io/kuar-demo/kuard-amd64:blue
+        resources:
+          requests:
+            cpu: "0.2"
+            memory: 100Mi
+          limits:
+            cpu: "1.0"
+            memory: 500Mi
