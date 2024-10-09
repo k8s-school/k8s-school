@@ -35,6 +35,8 @@ data:
         echo "waiting for replication set initialization"
         sleep 2
       done
+      # Wait for mongo-0 to reach stable state
+      sleep 15
       echo "adding self to mongo-0"
       /usr/bin/mongo --host=${HOST} \
          --eval="printjson(rs.add('${HOSTNAME}.mongo'))"
