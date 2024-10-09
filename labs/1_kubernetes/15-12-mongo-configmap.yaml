@@ -8,11 +8,9 @@ data:
 
     set -euxo pipefail
 
-    PORT=27017
-
     # Need to wait for the readiness health check to pass so that the
     # mongo names resolve. This is kind of wonky.
-    until timeout 1 bash -c "cat < /dev/null > /dev/tcp/${HOSTNAME}.mongo/${PORT}"; do
+    until ping -c 1 ${HOSTNAME}.mongo; do
       echo "waiting for DNS (${HOSTNAME}.mongo)..."
       sleep 2
     done
@@ -23,7 +21,7 @@ data:
     done
     echo "connected to local."
 
-    HOST="mongo-0.mongo:${PORT}"
+    HOST=mongo-0.mongo:27017
 
     until /usr/bin/mongo --host=${HOST} --eval 'printjson(db.serverStatus())'; do
       echo "connecting to remote mongo..."
