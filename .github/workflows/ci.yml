@@ -28,16 +28,14 @@ jobs:
       - name: Run job labs
         run: |
           DIR="$PWD/labs/1_kubernetes/.solution"
-          cd $DIR
           echo "Installing queue server"
-          ./QUEUE-install.sh
-          ./QUEUE-test.sh
+          $DIR/QUEUE-install.sh
+          $DIR/QUEUE-test.sh
       - name: Run mongo lab
         run: |
           DIR="$PWD/labs/1_kubernetes/.solution"
-          cd $DIR
           echo "Installing MongoDB"
-          ./MONGODB-install.sh
-          ./MONGODB-test.sh
+          $DIR/MONGODB-install.sh
+          $DIR/MONGODB-test.sh
 
 
