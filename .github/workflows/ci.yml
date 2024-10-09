@@ -25,7 +25,17 @@ jobs:
           ktbx create -s
           kubectl get nodes
           kubectl get pods -n kube-system
-      - name: Run labs 
+      - name: Run job labs
         run: |
-          cd ./labs/1_kubernetes/.solution
-          ./ci.sh
+          DIR="$PWD/labs/1_kubernetes/.solution"
+          echo "Installing queue server"
+          $DIR/QUEUE-install.sh
+          $DIR/QUEUE-test.sh
+      - name: Run mongo lab
+        run: |
+          DIR="$PWD/labs/1_kubernetes/.solution"
+          echo "Installing MongoDB"
+          $DIR/MONGODB-install.sh
+          $DIR/MONGODB-test.sh
+
+
