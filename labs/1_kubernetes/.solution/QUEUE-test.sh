@@ -3,6 +3,8 @@ set -x
 
 PORT=8081
 
+DIR=$(cd "$(dirname "$0")"; pwd -P)
+
 echo "Create a work queue called 'keygen'"
 curl -X PUT localhost:$PORT/memq/server/queues/keygen
 
