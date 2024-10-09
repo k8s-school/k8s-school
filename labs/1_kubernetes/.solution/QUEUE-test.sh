@@ -17,4 +17,4 @@ done
 curl localhost:$PORT/memq/server/stats
 
 echo "Create a consumer job"
-kubectl apply -f $DIR/12-7-job-consumers.yaml
+kubectl apply -f $DIR/../12-7-job-consumers.yaml
