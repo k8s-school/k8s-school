@@ -19,4 +19,5 @@ kubectl get pods -l app=mongo
 sleep 25
 
 echo "Checking the status of the mongo replica set"
+# TODO parse JSON output
 kubectl exec -it mongo-0 -- /usr/bin/mongo  --eval 'printjson(rs.status())'
