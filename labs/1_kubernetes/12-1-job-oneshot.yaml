@@ -14,8 +14,9 @@ spec:
     spec:
       containers:
       - name: kuard
-        image: gcr.io/kuar-demo/kuard-amd64:1
+        image: k8sschool/kuard-amd64:1
         imagePullPolicy: Always
+        command: ["/kuard"]
         args:
         - "--keygen-enable"
         - "--keygen-exit-on-complete"

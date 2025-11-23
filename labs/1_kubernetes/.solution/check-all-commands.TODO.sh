@@ -19,7 +19,7 @@ kubectl get deployments --namespace=kube-system kubernetes-dashboard
 # Common kubectl commands
 #
 # See https://kubernetes.io/docs/user-guide/kubectl-cheatsheet/
-# kubectl run kuard --image=gcr.io/kuar-demo/kuard-adm64:1
+# kubectl run kuard --image=k8sschool/kuard-amd64:1
 # kubectl get pods kuard-xxxx -o jsonpath --template={.status.podIP}
 # kubectl describe <resource-name> <obj-name>
 
@@ -40,7 +40,7 @@ kubectl get deployments --namespace=kube-system kubernetes-dashboard
 
 # Pods
 #
-kubectl run kuard --image=gcr.io/kuar-demo/kuard-adm64:1
+kubectl run kuard --image=k8sschool/kuard-amd64:1
 kubectl get pods
 kubectl delete deployments/kuard
 kubectl apply -f  5-1-kuard-pod.yaml
@@ -70,19 +70,19 @@ kubectl delete -f  5-1-kuard-pod.yaml
 # Label & Annotations
 #
 kubectl run alpaca-prod \
-    --image=gcr.io/kuar-demo/kuard-amd64:1 \
+    --image=k8sschool/kuard-amd64:1 \
     --replicas=2 \
     --labels="ver=1,app=alpaca,env=prod"
 kubectl run alpaca-test \
-    --image=gcr.io/kuar-demo/kuard-amd64:1 \
+    --image=k8sschool/kuard-amd64:1 \
     --replicas=1 \
     --labels="ver=2,app=alpaca,env=test"
 kubectl run bandicoot-prod \
-    --image=gcr.io/kuar-demo/kuard-amd64:1 \
+    --image=k8sschool/kuard-amd64:1 \
     --replicas=2 \
     --labels="ver=2,app=bandicoot,env=prod"
 kubectl run bandicoot-test \
-    --image=gcr.io/kuar-demo/kuard-amd64:1 \
+    --image=k8sschool/kuard-amd64:1 \
     --replicas=1 \
     --labels="ver=2,app=bandicoot,env=staging"
 kubectl get deployment --show-labels

@@ -8,7 +8,7 @@ spec:
       hostPath:
         path: "/var/lib/kuard"
   containers:
-    - image: gcr.io/kuar-demo/kuard-amd64:1
+    - image: k8sschool/kuard-amd64:1
       name: kuard
       volumeMounts:
         - mountPath: "/data"
