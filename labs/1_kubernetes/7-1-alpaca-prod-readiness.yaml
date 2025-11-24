@@ -27,7 +27,7 @@ spec:
         ver: "1"
     spec:
       containers:
-      - image: gcr.io/kuar-demo/kuard-amd64:blue
+      - image: k8sschool/kuard-amd64:blue
         imagePullPolicy: IfNotPresent
         name: alpaca-prod
         ports:

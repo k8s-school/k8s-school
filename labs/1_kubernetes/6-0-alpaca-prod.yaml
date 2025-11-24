@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: kuard
-        image: gcr.io/kuar-demo/kuard-amd64:blue
+        image: k8sschool/kuard-amd64:blue
         resources:
           requests:
             cpu: "0.2"

@@ -18,4 +18,4 @@ spec:
     spec:
       containers:
         - name: kuard
-          image: "gcr.io/kuar-demo/kuard-amd64:2"
+          image: "k8sschool/kuard-amd64:2"
