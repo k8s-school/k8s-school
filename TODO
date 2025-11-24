@@ -1,0 +1,11 @@
+docker_preload (mongo nginx:1.25.3 busybox:1.37.0
+kustomize
+helm?? ça fonctionne??
+Comprendre les dépréciations d'API
+booter le serveur
+check accès port-forward (mise en place proxy nginx??)     kubectl port-forward --address 0.0.0.0
+
+Jérémie
+docker preload
+Run de kuard et accès port-forward
+question jérémie pur l'accès au port forward pour les VM des participants
