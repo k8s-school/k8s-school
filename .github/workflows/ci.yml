@@ -21,7 +21,7 @@ jobs:
           go-version: '1.21.4'
       - name: Create k8s/kind cluster
         run: |
-          go install github.com/k8s-school/ktbx@v1.1.3-rc1
+          go install github.com/k8s-school/ktbx@v1.1.3-rc9
           ktbx create -s
           kubectl get nodes
           kubectl get pods -n kube-system
