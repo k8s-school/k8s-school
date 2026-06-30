@@ -7,7 +7,20 @@
       "Read(//home/fjammes/src/github.com/k8s-school/kuard/**)",
       "Bash(git add:*)",
       "Bash(git commit -m \"$(cat <<''EOF''\nReplace gcr.io/kuar-demo/kuard-amd64:1 with k8sschool/kuard-amd64:1\n\n- Update all Kubernetes manifests to use new image\n- Add explicit command: [\"/kuard\"] for jobs with args\n- Ensure labs work with local Kubernetes cluster\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "WebFetch(domain:k8s-school.fr)",
+      "Bash(git log:*)",
+      "Read(//home/fjammes/**)",
+      "Bash(hugo server:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(hugo)",
+      "Bash(curl:*)",
+      "Bash(hugo:*)",
+      "Bash(go install:*)",
+      "Bash(grep:*)",
+      "Bash(pkill:*)",
+      "WebSearch",
+      "WebFetch(domain:www.cncf.io)"
     ],
     "deny": [],
     "ask": []
