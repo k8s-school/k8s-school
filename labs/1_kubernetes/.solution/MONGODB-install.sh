@@ -10,14 +10,21 @@ kubectl apply -f $DIR/15-14-mongo-pvc.yaml
 
 NB_REPLICA=3
 
-for ((i=0; i<$NB_REPLICA; i++))
-do
-  kubectl wait --for=condition=ready pod --timeout=60s -l statefulset.kubernetes.io/pod-name=mongo-$i
-done
-
+kubectl rollout status --timeout=300s statefulset/mongo
 kubectl get pods -l app=mongo
-sleep 25
 
-echo "Checking the status of the mongo replica set"
-# TODO parse JSON output
-kubectl exec -it mongo-0 -- /usr/bin/mongo  --eval 'printjson(rs.status())'
+echo "Waiting for the $NB_REPLICA members of the mongo replica set to be healthy"
+for i in $(seq 60); do
+  healthy=$(kubectl exec mongo-0 -c mongodb -- mongosh --quiet \
+    --eval 'rs.status().members.filter(m => m.health == 1).length' || echo 0)
+  if [ "$healthy" -eq "$NB_REPLICA" ]; then
+    break
+  fi
+  sleep 5
+done
+kubectl exec mongo-0 -c mongodb -- mongosh --quiet \
+  --eval 'rs.status().members.map(m => m.name + " " + m.stateStr)'
+if [ "$healthy" -ne "$NB_REPLICA" ]; then
+  >&2 echo "ERROR: $healthy healthy members in the replica set, expected $NB_REPLICA"
+  exit 1
+fi

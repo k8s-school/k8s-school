@@ -8,45 +8,40 @@ data:
 
     set -euxo pipefail
 
-    # Need to wait for the readiness health check to pass so that the
-    # mongo names resolve. This is kind of wonky.
-    until ping -c 1 ${HOSTNAME}.mongo; do
+    # Need to wait for the headless service to publish this pod
+    # so that the mongo names resolve
+    until getent hosts ${HOSTNAME}.mongo; do
       echo "waiting for DNS (${HOSTNAME}.mongo)..."
       sleep 2
     done
 
-    until /usr/bin/mongo --eval 'printjson(db.serverStatus())'; do
+    until mongosh --quiet --eval 'db.adminCommand("ping")'; do
       echo "connecting to local mongo..."
       sleep 2
     done
     echo "connected to local."
 
-    HOST=mongo-0.mongo:27017
-
-    until /usr/bin/mongo --host=${HOST} --eval 'printjson(db.serverStatus())'; do
-      echo "connecting to remote mongo..."
-      sleep 2
-    done
-    echo "connected to remote."
-
-    if [[ "${HOSTNAME}" != 'mongo-0' ]]; then
-      until /usr/bin/mongo --host=${HOST} --eval="printjson(rs.status())" \
-            | grep -v "no replset config has been received"; do
-        echo "waiting for replication set initialization"
+    if [[ "${HOSTNAME}" == 'mongo-0' ]]; then
+      # rs.status() fails if the replica set is not initialized yet:
+      # this keeps the script idempotent when the pod restarts
+      echo "initializing replica set"
+      mongosh --quiet --eval '
+        try { rs.status() } catch (e) {
+          rs.initiate({_id: "rs0", members: [{_id: 0, host: "mongo-0.mongo:27017"}]})
+        }'
+    else
+      # Connect to the replica set, not to mongo-0: after a rolling update,
+      # the primary can be any member
+      RS="mongodb://mongo-0.mongo:27017/?replicaSet=rs0"
+      until mongosh --quiet "${RS}" --eval 'db.hello().isWritablePrimary' | grep true; do
+        echo "waiting for the replica set primary..."
         sleep 2
       done
-      # Wait for mongo-0 to reach stable state
-      sleep 15
-      echo "adding self to mongo-0"
-      /usr/bin/mongo --host=${HOST} \
-         --eval="printjson(rs.add('${HOSTNAME}.mongo'))"
-    fi
-
-    if [[ "${HOSTNAME}" == 'mongo-0' ]]; then
-      echo "initializing replica set"
-      /usr/bin/mongo --eval="printjson(rs.initiate(\
-          {'_id': 'rs0', 'members': [{'_id': 0, \
-           'host': 'mongo-0.mongo:27017'}]}))"
+      echo "adding self to the replica set"
+      mongosh --quiet "${RS}" --eval "
+        if (!rs.conf().members.some(m => m.host == '${HOSTNAME}.mongo:27017')) {
+          rs.add('${HOSTNAME}.mongo:27017')
+        }"
     fi
     echo "initialized"
 

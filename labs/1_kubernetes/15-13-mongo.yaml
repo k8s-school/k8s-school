@@ -15,16 +15,17 @@ spec:
     spec:
       containers:
       - name: mongodb
-        image: mongo:3.4.1
+        image: docker.io/library/mongo:7.0.43
         command:
         - mongod
         - --replSet
         - rs0
+        - --bind_ip_all
         ports:
         - containerPort: 27017
           name: web
       - name: init-mongo
-        image: mongo:3.4.1
+        image: docker.io/library/mongo:7.0.43
         command:
         - bash
         - /config/init.sh
