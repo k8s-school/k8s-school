@@ -24,3 +24,11 @@ spec:
         ports:
         - containerPort: 27017
           name: peer
+        # Writable for any UID: the image /data/db belongs to the mongodb user,
+        # and OpenShift runs the container with a random UID
+        volumeMounts:
+        - name: database
+          mountPath: /data/db
+      volumes:
+      - name: database
+        emptyDir: {}
