@@ -4,6 +4,14 @@ set -euxo pipefail
 
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
+# Per-trainee namespace, as in the lab page: the cluster may be shared
+ID="${ID:-$(whoami)}"
+NS="mongo-$ID"
+kubectl delete namespace -l "mongo=$ID"
+kubectl create namespace "$NS"
+kubectl label namespace "$NS" "mongo=$ID"
+kubectl config set-context --current --namespace="$NS"
+
 kubectl apply -f $DIR/../15-12-mongo-configmap.yaml
 kubectl apply -f $DIR/../15-11-mongo-service.yaml
 kubectl apply -f $DIR/15-14-mongo-pvc.yaml

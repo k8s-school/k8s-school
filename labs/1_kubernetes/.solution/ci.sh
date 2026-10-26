@@ -13,5 +13,6 @@ $DIR/QUEUE-test.sh
 echo "Installing MongoDB"
 $DIR/MONGODB-install.sh
 $DIR/MONGODB-test.sh
+$DIR/MONGODB-update.sh
 
 
